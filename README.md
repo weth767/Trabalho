@@ -1,2 +1,4 @@
-# Trabalho
-Trabalho de Programação Orientada a Objetos utilizando Java
+# TrabalhoPOO
+
+Email Drive: wethsouza767@gmail.com
+
