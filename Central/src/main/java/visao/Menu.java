@@ -6,9 +6,13 @@
 package visao;
 
 
+import com.google.api.services.drive.model.FileList;
+import conexao.ConexaoDrive;
 import dao.CandidatoDao;
 import dao.EleitorDao;
 import dao.PartidoDao;
+import java.io.File;
+import java.util.List;
 import javax.swing.JFrame;
 
 
@@ -29,6 +33,8 @@ public class Menu extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setLocationRelativeTo(null);
         this.setTitle("Central");
+        ConexaoDrive.getInstance();
+        ConexaoDrive.listaArquivos();
     }
     
     /**

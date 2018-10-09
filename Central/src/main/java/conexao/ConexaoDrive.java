@@ -41,7 +41,7 @@ public class ConexaoDrive {
      * Global instance of the scopes required by this quickstart. If modifying
      * these scopes, delete your previously saved tokens/ folder.
      */
-    private static final List<String> SCOPES = Collections.singletonList(DriveScopes.DRIVE);
+    private static final List<String> SCOPES = Collections.singletonList(DriveScopes.DRIVE_FILE);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
     private static NetHttpTransport HTTP_TRANSPORT = null;
@@ -156,22 +156,18 @@ public class ConexaoDrive {
         }
     }
 
-    public static void downloadArquivo(String id) {
+    public static String leArquivoGD(String arquivoID) {
         OutputStream saida = new ByteArrayOutputStream();
         try {
-            servico.files().export(id, "text/json").executeMediaAndDownloadTo(saida);
+            servico.files().get(arquivoID)
+                    .executeMediaAndDownloadTo(saida);
+            return saida.toString();
         } catch (IOException ex) {
             ex.getMessage();
         }
-        /*try {
-            System.out.println("\nid: " + id + "\n");
-            servico.files().get(id).executeMediaAndDownloadTo(saida);
-            servico.files().get(id).executeAndDownloadTo(saida);
-        } catch (IOException ex) {
-            ex.getMessage();
-        }*/
+        return null;
     }
-    
+
     private static Permission atualizaPermissao(String fileId, String permissionId, String newRole) {
         try {
             // First retrieve the permission from the API.
