@@ -7,6 +7,9 @@ package visao;
 
 import conexao.ConexaoDrive;
 import dao.PartidoDao;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import uteis.Arquivo;
 
 /**
  *
@@ -26,11 +29,13 @@ public class EnviaPartidos extends javax.swing.JFrame {
     }
     
     public void geraJson(){
-        partidoDao.createJSON();
+        ArrayList<Object> l = (ArrayList<Object>)(Object)partidoDao.retornaPartidos();
+        Arquivo.criaArquivoJSON(l,"partidos.json");
     }
     public void enviaDrive(){
         ConexaoDrive.getInstance();
-        ConexaoDrive.criaArquivo("Partido.json", "Partido.json");
+        ConexaoDrive.criaArquivo("partidos.json", "partidos.json");
+        JOptionPane.showMessageDialog(this, "Dados dos partidos enviados com sucesso!\n");
     }
 
     /**
@@ -46,7 +51,7 @@ public class EnviaPartidos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jlabelEleitor.setFont(new java.awt.Font("aakar", 0, 24)); // NOI18N
         jlabelEleitor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

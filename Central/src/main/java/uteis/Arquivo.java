@@ -5,11 +5,15 @@
  */
 package uteis;
 
+import com.google.gson.Gson;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -49,6 +53,25 @@ public class Arquivo {
                     e.getMessage());
         }
         return matriz;
+    }
+    
+    public static void criaArquivoJSON(ArrayList<Object> lista, String caminho){
+        Gson gson = new Gson();
+        FileWriter arq = null;
+        try {
+            arq = new FileWriter(caminho);
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
+        PrintWriter gravarArq = new PrintWriter(arq);
+        for (Object l : lista) {
+            gravarArq.printf("%s",gson.toJson(l));
+        }
+        try {
+            arq.close();
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
     }
 
 }

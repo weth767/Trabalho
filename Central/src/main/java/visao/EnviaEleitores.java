@@ -7,6 +7,9 @@ package visao;
 
 import conexao.ConexaoDrive;
 import dao.EleitorDao;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import uteis.Arquivo;
 
 /**
  *
@@ -26,11 +29,13 @@ public class EnviaEleitores extends javax.swing.JFrame {
     }
     
     public void geraJson(){
-        eleitorDao.createJSON();
+        ArrayList<Object> l = (ArrayList<Object>)(Object)eleitorDao.retornaEleitores();
+        Arquivo.criaArquivoJSON(l, "eleitores.json");
     }
     public void enviaDrive(){
         ConexaoDrive.getInstance();
-        ConexaoDrive.criaArquivo("Eleitor.json", "Eleitor.json");
+        ConexaoDrive.criaArquivo("eleitores.json", "eleitores.json");
+        JOptionPane.showMessageDialog(this, "Dados dos eleitores enviados com sucesso!\n");
     }
 
     /**
@@ -46,7 +51,7 @@ public class EnviaEleitores extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jenviaEleitores = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jlabelEleitor.setFont(new java.awt.Font("aakar", 0, 24)); // NOI18N
         jlabelEleitor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

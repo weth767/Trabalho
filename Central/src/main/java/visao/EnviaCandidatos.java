@@ -7,6 +7,9 @@ package visao;
 
 import conexao.ConexaoDrive;
 import dao.CandidatoDao;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import uteis.Arquivo;
 
 /**
  *
@@ -26,11 +29,13 @@ public class EnviaCandidatos extends javax.swing.JFrame {
     }
     
     public void geraJson(){
-        candidatoDao.createJSON();
+        ArrayList<Object> l = (ArrayList<Object>)(Object)candidatoDao.retornaCandidatos();
+        Arquivo.criaArquivoJSON(l, "candidatos.json");
     }
     public void enviaDrive(){
         ConexaoDrive.getInstance();
-        ConexaoDrive.criaArquivo("Candidato.json", "Candidato.json");
+        ConexaoDrive.criaArquivo("candidatos.json", "candidatos.json");
+        JOptionPane.showMessageDialog(this, "Dados dos candidatos enviados com sucesso!\n");
     }
 
     
@@ -42,7 +47,7 @@ public class EnviaCandidatos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         enviaCandidato = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jlabelCandidato.setFont(new java.awt.Font("aakar", 0, 24)); // NOI18N
         jlabelCandidato.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
