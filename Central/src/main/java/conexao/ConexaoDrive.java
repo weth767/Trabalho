@@ -28,8 +28,7 @@ import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class ConexaoDrive {
 
@@ -41,7 +40,7 @@ public class ConexaoDrive {
      * Global instance of the scopes required by this quickstart. If modifying
      * these scopes, delete your previously saved tokens/ folder.
      */
-    private static final List<String> SCOPES = Collections.singletonList(DriveScopes.DRIVE_FILE);
+    private static final List<String> SCOPES = Collections.singletonList(DriveScopes.DRIVE);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
     private static NetHttpTransport HTTP_TRANSPORT = null;

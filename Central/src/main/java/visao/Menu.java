@@ -33,8 +33,6 @@ public class Menu extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setLocationRelativeTo(null);
         this.setTitle("Central");
-        ConexaoDrive.getInstance();
-        ConexaoDrive.listaArquivos();
     }
     
     /**
