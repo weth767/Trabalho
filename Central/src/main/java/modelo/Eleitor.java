@@ -13,20 +13,11 @@ public class Eleitor {
     private String titulo_eleitor;
     private String nome;
     private String cpf;
-    //private Integer matriz_imagem[][];
-    private String imagem;
-
-    public String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
+    private Integer matriz_imagem[][];
     private int numero_urna;
 
+
     public Eleitor() {
-        //this.matriz_imagem = new Integer[1000][1000];
     }
     
     public String getTitulo_eleitor() {
@@ -53,13 +44,13 @@ public class Eleitor {
         this.cpf = cpf;
     }
 
-    /*public Integer[][] getMatriz_imagem() {
+    public Integer[][] getMatriz_imagem() {
         return matriz_imagem;
     }
 
     public void setMatriz_imagem(Integer[][] matriz_imagem) {
         this.matriz_imagem = matriz_imagem;
-    }*/
+    }
 
     public int getNumero_urna() {
         return numero_urna;

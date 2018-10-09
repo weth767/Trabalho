@@ -5,11 +5,12 @@
  */
 package visao;
 
-
 import dao.EleitorDao;
 import java.io.File;
 import modelo.Eleitor;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import uteis.Arquivo;
 
 /**
@@ -36,9 +37,14 @@ public class CadastraEleitor extends javax.swing.JFrame {
         eleitor.setCpf(jCpf.getText());
         eleitor.setNome(jtfNome.getText());
         eleitor.setTitulo_eleitor(jtfTitulo.getText());
-        eleitor.setImagem(new Arquivo().leImagemString(this.fileName.getText()));
-        //eleitor.setMatriz_imagem(new Arquivo().leImagem(this.fileName.getText()));
-        //le_arquivo(fileName.getText());
+        Integer matriz[][] = new Arquivo().leImagemMatriz(this.fileName.getText());
+        if (matriz == null) {
+            this.limparCampos();
+            JOptionPane.showMessageDialog(this, "Erro ao ler o arquivo, tente novamente", "Erro", JOptionPane.ERROR_MESSAGE);
+            return null;
+        } 
+            eleitor.setMatriz_imagem(matriz);
+        
         return eleitor;
     }
 
@@ -281,6 +287,8 @@ public class CadastraEleitor extends javax.swing.JFrame {
 
     private void arquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arquivoActionPerformed
         JFileChooser arquivo = new JFileChooser();
+        arquivo.setFileFilter(new FileNameExtensionFilter("Image files", "ppm"));
+        arquivo.setAcceptAllFileFilterUsed(false);
         arquivo.showOpenDialog(null);
         File file = arquivo.getSelectedFile();
         String caminho = file.getAbsolutePath();
