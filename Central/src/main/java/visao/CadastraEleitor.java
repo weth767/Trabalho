@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import uteis.Arquivo;
+import static uteis.Verifica.validaCPF;
 
 /**
  *
@@ -39,7 +40,7 @@ public class CadastraEleitor extends javax.swing.JFrame {
         eleitor.setTitulo_eleitor(jtfTitulo.getText());
         Integer matriz[][] = new Arquivo().leImagemMatriz(this.fileName.getText());
         if (matriz == null) {
-            this.limparCampos();
+            this.fileName.setText("");
             JOptionPane.showMessageDialog(this, "Erro ao ler o arquivo, tente novamente", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         } 
@@ -53,6 +54,26 @@ public class CadastraEleitor extends javax.swing.JFrame {
         this.jtfNome.setText("");
         this.jtfTitulo.setText("");
         this.fileName.setText("");
+    }
+    public String validaCandidato() {
+        String erros = "";
+        if (jtfNome.getText().equals("")) {
+            erros += "Insira o nome do eleitor\n";
+        }
+        if (jtfTitulo.getText().equals("")) {
+            erros += "Insira o titulo do eleitor\n";
+        }
+        if (fileName.getText().equals("")) {
+            erros += "Insira a imagem do eleitor\n";
+        }
+        if (jCpf.getText().equals("   .   .   -  ")) {
+            erros += "Insira o CPF do eleitor\n";
+            return erros;
+        }
+        if (validaCPF(jCpf.getText()) == false) {
+            erros += "CPF Inválido\n";
+        }        
+        return erros;
     }
 
     /**
@@ -266,8 +287,14 @@ public class CadastraEleitor extends javax.swing.JFrame {
     }//GEN-LAST:event_ButttonLimparActionPerformed
 
     private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarActionPerformed
+        String erro = validaCandidato();
+        if (!erro.equals("")) {
+            JOptionPane.showMessageDialog(this, erro, "Erro ao cadastrar Eleitor", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Eleitor e = novoEleitor();
         eleitorDao.cadastraEleitor(e);
+        JOptionPane.showMessageDialog(this, "Eleitor cadastrado com sucesso", "Candidato Cadastrado", JOptionPane.INFORMATION_MESSAGE);
         this.limparCampos();
     }//GEN-LAST:event_ButtonCadastrarActionPerformed
 

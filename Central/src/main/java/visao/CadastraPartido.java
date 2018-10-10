@@ -6,6 +6,7 @@
 package visao;
 
 import dao.PartidoDao;
+import javax.swing.JOptionPane;
 import modelo.Partido;
 
 
@@ -39,6 +40,18 @@ public class CadastraPartido extends javax.swing.JFrame {
         jtfNome.setText("");
         jtfNumero.setText("");
     }
+    
+    public String validaCandidato() {
+        String erros = "";
+        if (jtfNome.getText().equals("")) {
+            erros += "Insira o nome do partido\n";
+        }
+        if (jtfNumero.getText().equals("  ")) {
+            erros += "Insira o número do partido\n";
+        }
+        return erros;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -202,7 +215,13 @@ public class CadastraPartido extends javax.swing.JFrame {
     }//GEN-LAST:event_ButttonLimparActionPerformed
 
     private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarActionPerformed
+        String erro = validaCandidato();
+        if(!erro.equals("")){
+            JOptionPane.showMessageDialog(this, erro, "Erro ao cadastrar Partido", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         partidoDao.cadastraPartido(this.novoPartido());
+        JOptionPane.showMessageDialog(this, "Partido Cadastrado com sucesso", "Partido Cadastrado", JOptionPane.INFORMATION_MESSAGE);
         this.limparCampos();
     }//GEN-LAST:event_ButtonCadastrarActionPerformed
 
