@@ -23,6 +23,7 @@ public class CadastraPartido extends javax.swing.JFrame {
     public CadastraPartido(PartidoDao partidoDao) {
         this.partidoDao = partidoDao;
         initComponents();
+        jtfNumero.setEditable(true);
         this.setTitle("Cadastra Partido");
         this.setLocationRelativeTo(null);
     }
@@ -53,8 +54,8 @@ public class CadastraPartido extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabelNome = new javax.swing.JLabel();
         jtfNome = new javax.swing.JTextField();
-        jtfNumero = new javax.swing.JTextField();
         jLabelTitulo = new javax.swing.JLabel();
+        jtfNumero = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         ButttonLimpar = new javax.swing.JButton();
         ButtonCadastrar = new javax.swing.JButton();
@@ -73,6 +74,18 @@ public class CadastraPartido extends javax.swing.JFrame {
         jLabelTitulo.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabelTitulo.setText("Número:");
 
+        jtfNumero.setEditable(false);
+        try {
+            jtfNumero.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jtfNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNumeroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -83,8 +96,8 @@ public class CadastraPartido extends javax.swing.JFrame {
                     .addComponent(jLabelNome))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -98,7 +111,7 @@ public class CadastraPartido extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addGap(51, 51, 51))
         );
 
         ButttonLimpar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -197,6 +210,10 @@ public class CadastraPartido extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ButtonCancelarActionPerformed
 
+    private void jtfNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNumeroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -212,6 +229,6 @@ public class CadastraPartido extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel jlabelEleitor;
     private javax.swing.JTextField jtfNome;
-    private javax.swing.JTextField jtfNumero;
+    private javax.swing.JFormattedTextField jtfNumero;
     // End of variables declaration//GEN-END:variables
 }

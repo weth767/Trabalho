@@ -18,15 +18,18 @@ import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import com.google.api.services.drive.model.Permission;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.ws.http.HTTPException;
 
 public class ConexaoDrive {
 
@@ -153,24 +156,12 @@ public class ConexaoDrive {
         }
     }
 
-    public static String leArquivoGD(String arquivoID) {
-        try {
-            Export exportacao = servico.files().export(arquivoID, "application/vnd.google-apps.script+json");
-            InputStream saida = exportacao.executeMediaAsInputStream();
-            InputStreamReader leitorSaida = new InputStreamReader(saida);
-            BufferedReader bufferLeitor = new BufferedReader(leitorSaida);
-            StringBuilder resposta = new StringBuilder();
-            String linha = null;
-            while ((linha = bufferLeitor.readLine()) != null) {
-                resposta.append(linha);
-            }
-            return resposta.toString();
-        } catch (IOException ex) {
-            ex.getMessage();
-        }
-        return null;
+    public static String leArquivoGD(String arquivoID) throws IOException, HTTPException{
+        OutputStream outputStream = new ByteArrayOutputStream();
+        servico.files().get(arquivoID)
+                .executeMediaAndDownloadTo(outputStream);
+        return outputStream.toString();
     }
-
     private static Permission atualizaPermissao(String fileId, String permissionId, String newRole) {
         try {
             // First retrieve the permission from the API.

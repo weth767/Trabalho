@@ -33,10 +33,6 @@ public class Menu extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setLocationRelativeTo(null);
         this.setTitle("Central");
-        ConexaoDrive.getInstance();
-        List<com.google.api.services.drive.model.File> l = ConexaoDrive.listaArquivos();
-        System.out.println(l.get(0).getName() + " " + l.get(0).getId());
-        System.out.println(ConexaoDrive.leArquivoGD(l.get(0).getId()));
     }
     
     /**

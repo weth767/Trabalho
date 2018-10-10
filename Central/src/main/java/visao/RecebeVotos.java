@@ -8,7 +8,11 @@ package visao;
 import com.google.api.services.drive.model.File;
 import javax.swing.table.DefaultTableModel;
 import conexao.ConexaoDrive;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.ws.http.HTTPException;
 
 
 /**
@@ -28,12 +32,17 @@ public class RecebeVotos extends javax.swing.JFrame {
         //vai receber o arquivo de votos
         ConexaoDrive.getInstance();
         List<File> l = ConexaoDrive.listaArquivos();
-        for(File arquivos: l){
-            if(arquivos.getName().equals("votação.json")){
-                ConexaoDrive.leArquivoGD(arquivos.getId());
+        for(File arquivo: l){
+            if(arquivo.getName().equals("votação.json")){
+                try {
+                    ConexaoDrive.leArquivoGD(arquivo.getId());
+                } catch (IOException ex) {
+                    Logger.getLogger(RecebeVotos.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (HTTPException ex) {
+                    Logger.getLogger(RecebeVotos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        //le o arquivo de votos e seta na tabela
     }
 
     /**
@@ -126,41 +135,6 @@ public class RecebeVotos extends javax.swing.JFrame {
     private void botaoBaixaVotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBaixaVotosActionPerformed
         
     }//GEN-LAST:event_botaoBaixaVotosActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RecebeVotos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RecebeVotos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RecebeVotos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RecebeVotos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RecebeVotos().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoBaixaVotos;

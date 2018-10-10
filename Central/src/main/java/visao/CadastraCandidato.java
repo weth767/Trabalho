@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Candidato;
 import modelo.Partido;
+import static uteis.Verifica.validaCPF;
 
 /**
  *
@@ -29,7 +30,7 @@ public class CadastraCandidato extends javax.swing.JFrame {
         this.partidoDao = partidoDao;
         this.candidatoDao = candidatoDao;
         arrayPartido = partidoDao.retornaPartidos();
-        if(arrayPartido == null || arrayPartido.isEmpty() || arrayPartido.size() == 0){
+        if (arrayPartido.isEmpty()) {
             this.mostra_erro();
             this.setVisible(false);
             this.dispose();
@@ -40,15 +41,38 @@ public class CadastraCandidato extends javax.swing.JFrame {
         jCpf.setEditable(true);
         this.setTitle("Cadastra Candidato");
         preenchePartidoCombo(arrayPartido);
-        
+
     }
-    public void mostra_erro(){
-        JOptionPane.showConfirmDialog(this, "Não existe partidos cadastrados, cadaste um partido para continuar","Erro Partido",JOptionPane.ERROR_MESSAGE); 
+
+    public void mostra_erro() {
+        JOptionPane.showConfirmDialog(this, "Não existe partidos cadastrados, cadaste um partido para continuar", "Erro Partido", JOptionPane.ERROR_MESSAGE);
     }
-    public void preenchePartidoCombo(ArrayList<Partido> arrayPartido){
+
+    public void preenchePartidoCombo(ArrayList<Partido> arrayPartido) {
         for (Partido partido : arrayPartido) {
             jComboPartido.addItem(partido.getNome());
         }
+    }
+
+    public String validaCandidato() {
+        String erros = "";
+        if (jtfNome.getText().equals("")) {
+            erros += "Insira o nome do candidato\n";
+        }
+        if (jtfNumero.getText().equals("")) {
+            erros += "Insira o número do candidato\n";
+        }
+        if (jComboPartido.getSelectedIndex() == -1) {
+            erros += "Insira o partido do candidato\n";
+        }
+        if (jCpf.getText().equals("   .   .   -  ")) {
+            erros += "Insira o CPF do candidato\n";
+            return erros;
+        }
+        if (validaCPF(jCpf.getText()) == false) {
+            erros += "CPF Inválido\n";
+        }
+        return erros;
     }
 
     public Candidato novoCandidato() {
@@ -271,7 +295,13 @@ public class CadastraCandidato extends javax.swing.JFrame {
     }//GEN-LAST:event_ButttonLimparActionPerformed
 
     private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarActionPerformed
+        String erro = validaCandidato();
+        if (!erro.equals("")) {
+            JOptionPane.showMessageDialog(this, erro, "Erro ao cadastrar Candidato", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         candidatoDao.cadastraCandidato(this.novoCandidato());
+        JOptionPane.showMessageDialog(this, "Candidato cadastrado com sucesso", "Candidato Cadastrado", JOptionPane.INFORMATION_MESSAGE);
         this.limparCampos();
     }//GEN-LAST:event_ButtonCadastrarActionPerformed
 

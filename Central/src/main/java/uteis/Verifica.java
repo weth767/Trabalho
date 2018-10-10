@@ -10,6 +10,7 @@ package uteis;
  * @author weth
  */
 public class Verifica {
+
     public static boolean validaCPF(String Cpf) {
         Cpf = Cpf.replaceAll("[\\.-]", "");
 
