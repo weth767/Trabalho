@@ -53,11 +53,13 @@ public class EnviaEleitores extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jlabelEleitor.setFont(new java.awt.Font("aakar", 0, 24)); // NOI18N
+        jlabelEleitor.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         jlabelEleitor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlabelEleitor.setText("Eleitores - Drive");
         jlabelEleitor.setToolTipText("");
 
+        jenviaEleitores.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jenviaEleitores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
         jenviaEleitores.setText("Enviar Eleitores");
         jenviaEleitores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +72,7 @@ public class EnviaEleitores extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jenviaEleitores)
                 .addGap(28, 28, 28))
         );

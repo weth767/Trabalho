@@ -53,7 +53,6 @@ public class CadastraEleitor extends javax.swing.JFrame {
         this.jtfNome.setText("");
         this.jtfTitulo.setText("");
         this.fileName.setText("");
-        this.jComboUrna.setSelectedIndex(-1);
     }
 
     /**
@@ -76,9 +75,7 @@ public class CadastraEleitor extends javax.swing.JFrame {
         jtfTitulo = new javax.swing.JTextField();
         jLabelCpf = new javax.swing.JLabel();
         jCpf = new javax.swing.JFormattedTextField();
-        LabelUrna = new javax.swing.JLabel();
         LabelUrna1 = new javax.swing.JLabel();
-        jComboUrna = new javax.swing.JComboBox<>();
         arquivo = new javax.swing.JButton();
         fileName = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -88,15 +85,18 @@ public class CadastraEleitor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jlabelEleitor.setFont(new java.awt.Font("aakar", 0, 24)); // NOI18N
+        jlabelEleitor.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         jlabelEleitor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlabelEleitor.setText("Eleitor");
         jlabelEleitor.setToolTipText("");
 
+        jLabelNome.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabelNome.setText("Nome:");
 
+        jLabelTitulo.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabelTitulo.setText("Titulo:");
 
+        jLabelCpf.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabelCpf.setText("CPF:");
 
         jCpf.setEditable(false);
@@ -111,17 +111,10 @@ public class CadastraEleitor extends javax.swing.JFrame {
             }
         });
 
-        LabelUrna.setText("Urna");
-
+        LabelUrna1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         LabelUrna1.setText("Imagem:");
 
-        jComboUrna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboUrna.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboUrnaActionPerformed(evt);
-            }
-        });
-
+        arquivo.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         arquivo.setText("Escolher Arquivo");
         arquivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,30 +129,27 @@ public class CadastraEleitor extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelNome)
                         .addGap(30, 30, 30)
                         .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelTitulo)
-                        .addGap(32, 32, 32)
+                        .addGap(18, 18, 18)
                         .addComponent(jtfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelCpf)
-                            .addComponent(LabelUrna))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCpf)
-                            .addComponent(jComboUrna, 0, 462, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(LabelUrna1)
+                            .addComponent(LabelUrna1)
+                            .addComponent(jLabelCpf))
                         .addGap(18, 18, 18)
-                        .addComponent(arquivo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fileName)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(arquivo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fileName)))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,16 +168,14 @@ public class CadastraEleitor extends javax.swing.JFrame {
                     .addComponent(jCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelUrna, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(jComboUrna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelUrna1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(LabelUrna1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(arquivo)
                     .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                .addGap(23, 23, 23))
         );
 
+        ButtonCancelar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        ButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/cancelar.png"))); // NOI18N
         ButtonCancelar.setText("Cancelar");
         ButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,6 +183,8 @@ public class CadastraEleitor extends javax.swing.JFrame {
             }
         });
 
+        ButtonCadastrar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        ButtonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/adicionar.png"))); // NOI18N
         ButtonCadastrar.setText("Cadastrar");
         ButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,6 +192,8 @@ public class CadastraEleitor extends javax.swing.JFrame {
             }
         });
 
+        ButttonLimpar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        ButttonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limpar.png"))); // NOI18N
         ButttonLimpar.setText("Limpar");
         ButttonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +210,7 @@ public class CadastraEleitor extends javax.swing.JFrame {
                 .addComponent(ButtonCadastrar)
                 .addGap(100, 100, 100)
                 .addComponent(ButttonLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addComponent(ButtonCancelar)
                 .addGap(85, 85, 85))
         );
@@ -240,12 +232,14 @@ public class CadastraEleitor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlabelEleitor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jlabelEleitor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -254,10 +248,10 @@ public class CadastraEleitor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jlabelEleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -281,10 +275,6 @@ public class CadastraEleitor extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ButtonCancelarActionPerformed
 
-    private void jComboUrnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboUrnaActionPerformed
-
-    }//GEN-LAST:event_jComboUrnaActionPerformed
-
     private void arquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arquivoActionPerformed
         JFileChooser arquivo = new JFileChooser();
         arquivo.setFileFilter(new FileNameExtensionFilter("Image files", "ppm"));
@@ -299,11 +289,9 @@ public class CadastraEleitor extends javax.swing.JFrame {
     private javax.swing.JButton ButtonCadastrar;
     private javax.swing.JButton ButtonCancelar;
     private javax.swing.JButton ButttonLimpar;
-    private javax.swing.JLabel LabelUrna;
     private javax.swing.JLabel LabelUrna1;
     private javax.swing.JButton arquivo;
     private javax.swing.JTextField fileName;
-    private javax.swing.JComboBox<String> jComboUrna;
     private javax.swing.JFormattedTextField jCpf;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JFileChooser jFileChooser2;

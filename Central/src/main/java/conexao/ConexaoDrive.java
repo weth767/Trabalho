@@ -5,30 +5,28 @@ import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInsta
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.FileContent;
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.Drive.Files.Export;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import com.google.api.services.drive.model.Permission;
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConexaoDrive {
 
@@ -156,11 +154,17 @@ public class ConexaoDrive {
     }
 
     public static String leArquivoGD(String arquivoID) {
-        OutputStream saida = new ByteArrayOutputStream();
         try {
-            servico.files().get(arquivoID)
-                    .executeMediaAndDownloadTo(saida);
-            return saida.toString();
+            Export exportacao = servico.files().export(arquivoID, "application/vnd.google-apps.script+json");
+            InputStream saida = exportacao.executeMediaAsInputStream();
+            InputStreamReader leitorSaida = new InputStreamReader(saida);
+            BufferedReader bufferLeitor = new BufferedReader(leitorSaida);
+            StringBuilder resposta = new StringBuilder();
+            String linha = null;
+            while ((linha = bufferLeitor.readLine()) != null) {
+                resposta.append(linha);
+            }
+            return resposta.toString();
         } catch (IOException ex) {
             ex.getMessage();
         }

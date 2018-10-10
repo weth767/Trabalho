@@ -62,13 +62,15 @@ public class CadastraPartido extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jlabelEleitor.setFont(new java.awt.Font("aakar", 0, 24)); // NOI18N
+        jlabelEleitor.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         jlabelEleitor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlabelEleitor.setText("Partido");
         jlabelEleitor.setToolTipText("");
 
+        jLabelNome.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabelNome.setText("Nome:");
 
+        jLabelTitulo.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jLabelTitulo.setText("Número:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -99,6 +101,8 @@ public class CadastraPartido extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
+        ButttonLimpar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        ButttonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limpar.png"))); // NOI18N
         ButttonLimpar.setText("Limpar");
         ButttonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +110,8 @@ public class CadastraPartido extends javax.swing.JFrame {
             }
         });
 
+        ButtonCadastrar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        ButtonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/adicionar.png"))); // NOI18N
         ButtonCadastrar.setText("Cadastrar");
         ButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +119,8 @@ public class CadastraPartido extends javax.swing.JFrame {
             }
         });
 
+        ButtonCancelar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        ButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/cancelar.png"))); // NOI18N
         ButtonCancelar.setText("Cancelar");
         ButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,8 +163,10 @@ public class CadastraPartido extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

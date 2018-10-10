@@ -33,6 +33,10 @@ public class Menu extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setLocationRelativeTo(null);
         this.setTitle("Central");
+        ConexaoDrive.getInstance();
+        List<com.google.api.services.drive.model.File> l = ConexaoDrive.listaArquivos();
+        System.out.println(l.get(0).getName() + " " + l.get(0).getId());
+        System.out.println(ConexaoDrive.leArquivoGD(l.get(0).getId()));
     }
     
     /**
@@ -61,6 +65,8 @@ public class Menu extends javax.swing.JFrame {
 
         Cadastros.setText("Cadastros");
 
+        cadEleitor.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        cadEleitor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/eleitor.png"))); // NOI18N
         cadEleitor.setText("Eleitor");
         cadEleitor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +75,8 @@ public class Menu extends javax.swing.JFrame {
         });
         Cadastros.add(cadEleitor);
 
+        cadCandidato.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        cadCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/candidato.png"))); // NOI18N
         cadCandidato.setText("Candidato");
         cadCandidato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +85,8 @@ public class Menu extends javax.swing.JFrame {
         });
         Cadastros.add(cadCandidato);
 
+        cadPartido.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        cadPartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/partido.png"))); // NOI18N
         cadPartido.setText("Partido");
         cadPartido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +99,8 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu2.setText("Drive");
 
+        driveEleitor.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        driveEleitor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
         driveEleitor.setText("Eleitores");
         driveEleitor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +109,8 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu2.add(driveEleitor);
 
+        driveCandidato.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        driveCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
         driveCandidato.setText("Candidatos");
         driveCandidato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +119,8 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu2.add(driveCandidato);
 
+        drivePartido.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        drivePartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
         drivePartido.setText("Partidos");
         drivePartido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
