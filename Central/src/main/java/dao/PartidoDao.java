@@ -45,22 +45,4 @@ public class PartidoDao {
         }
         return null;
     }
-    public void createJSON(){
-        Gson gson = new Gson();
-        FileWriter arq = null;
-        try {
-            arq = new FileWriter("Partido.json");
-        } catch (IOException ex) {
-            Logger.getLogger(PartidoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        PrintWriter gravarArq = new PrintWriter(arq);
-        for (Partido partido : partidos) {
-            gravarArq.printf("%s",gson.toJson(partido));
-        }
-        try {
-            arq.close();
-        } catch (IOException ex) {
-            Logger.getLogger(PartidoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

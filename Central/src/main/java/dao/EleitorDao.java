@@ -36,23 +36,5 @@ public class EleitorDao{
     }
     public ArrayList<Eleitor> retornaEleitores(){
         return this.eleitores;
-    }
-    public void createJSON(){
-        Gson gson = new Gson();
-        FileWriter arq = null;
-        try {
-            arq = new FileWriter("Eleitor.json");
-        } catch (IOException ex) {
-            Logger.getLogger(EleitorDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        PrintWriter gravarArq = new PrintWriter(arq);
-        for (Eleitor eleitor : eleitores) {
-            gravarArq.printf("%s",gson.toJson(eleitor));
-        }
-        try {
-            arq.close();
-        } catch (IOException ex) {
-            Logger.getLogger(EleitorDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }   
+    }  
 }

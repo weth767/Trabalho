@@ -55,7 +55,7 @@ public class CadastraEleitor extends javax.swing.JFrame {
         this.jtfTitulo.setText("");
         this.fileName.setText("");
     }
-    public String validaCandidato() {
+    public String validaEleitor() {
         String erros = "";
         if (jtfNome.getText().equals("")) {
             erros += "Insira o nome do eleitor\n";
@@ -126,11 +126,6 @@ public class CadastraEleitor extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCpfActionPerformed(evt);
-            }
-        });
 
         LabelUrna1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         LabelUrna1.setText("Imagem:");
@@ -278,16 +273,12 @@ public class CadastraEleitor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCpfActionPerformed
-
     private void ButttonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButttonLimparActionPerformed
         this.limparCampos();
     }//GEN-LAST:event_ButttonLimparActionPerformed
 
     private void ButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCadastrarActionPerformed
-        String erro = validaCandidato();
+        String erro = validaEleitor();
         if (!erro.equals("")) {
             JOptionPane.showMessageDialog(this, erro, "Erro ao cadastrar Eleitor", JOptionPane.ERROR_MESSAGE);
             return;
