@@ -7,12 +7,7 @@ package dao;
 
 import modelo.Eleitor;
 import java.util.ArrayList;
-import com.google.gson.Gson;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *

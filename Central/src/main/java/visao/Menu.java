@@ -6,13 +6,10 @@
 package visao;
 
 
-import com.google.api.services.drive.model.FileList;
-import conexao.ConexaoDrive;
+
 import dao.CandidatoDao;
 import dao.EleitorDao;
 import dao.PartidoDao;
-import java.io.File;
-import java.util.List;
 import javax.swing.JFrame;
 
 
@@ -30,7 +27,7 @@ public class Menu extends javax.swing.JFrame {
     CandidatoDao candidatoDao = new CandidatoDao();
     public Menu() {
         initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setTitle("Central");
     }
@@ -60,6 +57,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/eleicoes.png"))); // NOI18N
 
         Cadastros.setText("Cadastros");
+        Cadastros.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
 
         cadEleitor.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         cadEleitor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/eleitor.png"))); // NOI18N
@@ -94,6 +92,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(Cadastros);
 
         jMenu2.setText("Drive");
+        jMenu2.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
 
         driveEleitor.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         driveEleitor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
@@ -142,7 +141,7 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
