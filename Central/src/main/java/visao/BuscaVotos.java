@@ -110,7 +110,7 @@ public class BuscaVotos extends javax.swing.JFrame {
         jenviaEleitores = new javax.swing.JButton();
         jlabelEleitor = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jenviaEleitores.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         jenviaEleitores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
