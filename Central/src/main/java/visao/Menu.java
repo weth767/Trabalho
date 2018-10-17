@@ -47,10 +47,12 @@ public class Menu extends javax.swing.JFrame {
         cadEleitor = new javax.swing.JMenuItem();
         cadCandidato = new javax.swing.JMenuItem();
         cadPartido = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuUpload = new javax.swing.JMenu();
         driveEleitor = new javax.swing.JMenuItem();
         driveCandidato = new javax.swing.JMenuItem();
         drivePartido = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        driveVotos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,8 +93,8 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(Cadastros);
 
-        jMenu2.setText("Drive");
-        jMenu2.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jMenuUpload.setText("Drive Upload");
+        jMenuUpload.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
 
         driveEleitor.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         driveEleitor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
@@ -102,7 +104,7 @@ public class Menu extends javax.swing.JFrame {
                 driveEleitorActionPerformed(evt);
             }
         });
-        jMenu2.add(driveEleitor);
+        jMenuUpload.add(driveEleitor);
 
         driveCandidato.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         driveCandidato.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
@@ -112,7 +114,7 @@ public class Menu extends javax.swing.JFrame {
                 driveCandidatoActionPerformed(evt);
             }
         });
-        jMenu2.add(driveCandidato);
+        jMenuUpload.add(driveCandidato);
 
         drivePartido.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         drivePartido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
@@ -122,9 +124,24 @@ public class Menu extends javax.swing.JFrame {
                 drivePartidoActionPerformed(evt);
             }
         });
-        jMenu2.add(drivePartido);
+        jMenuUpload.add(drivePartido);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenuUpload);
+
+        jMenu1.setText("Drive Download");
+        jMenu1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+
+        driveVotos.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        driveVotos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
+        driveVotos.setText("Votos");
+        driveVotos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                driveVotosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(driveVotos);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -172,6 +189,10 @@ public class Menu extends javax.swing.JFrame {
         new EnviaCandidatos(candidatoDao).setVisible(true);
     }//GEN-LAST:event_driveCandidatoActionPerformed
 
+    private void driveVotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_driveVotosActionPerformed
+        new BuscaVotos(candidatoDao).setVisible(true);
+    }//GEN-LAST:event_driveVotosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -214,8 +235,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem driveCandidato;
     private javax.swing.JMenuItem driveEleitor;
     private javax.swing.JMenuItem drivePartido;
+    private javax.swing.JMenuItem driveVotos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuUpload;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,6 +14,19 @@ public class Candidato {
     private int numero;
     private String cpf;
     private Partido partido;
+    private int quantidadeVotos;
+
+    public int getQuantidadeVotos() {
+        return quantidadeVotos;
+    }
+
+    public Candidato() {
+        this.quantidadeVotos = 0;
+    }
+
+    public void setQuantidadeVotos(int quantidadeVotos) {
+        this.quantidadeVotos = quantidadeVotos;
+    }
 
     public String getNome() {
         return nome;

@@ -54,8 +54,21 @@ public class Arquivo {
         }
         return matriz;
     }
-    
-    public static void criaArquivoJSON(ArrayList<Object> lista, String caminho){
+
+    public static void criaArquivo(String conteudo, String caminho) throws IOException {
+        FileWriter arquivo;
+        try {
+            arquivo = new FileWriter(new File(caminho));
+            arquivo.write(conteudo);
+            arquivo.close();
+        } catch (IOException e) {
+            e.getMessage();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    public static void criaArquivoJSON(ArrayList<Object> lista, String caminho) {
         Gson gson = new Gson();
         FileWriter arq = null;
         try {
@@ -65,7 +78,7 @@ public class Arquivo {
         }
         PrintWriter gravarArq = new PrintWriter(arq);
         for (Object l : lista) {
-            gravarArq.printf("%s",gson.toJson(l));
+            gravarArq.printf("%s", gson.toJson(l));
         }
         try {
             arq.close();

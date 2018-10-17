@@ -7,12 +7,7 @@ package dao;
 
 import modelo.Candidato;
 import com.google.gson.Gson;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
