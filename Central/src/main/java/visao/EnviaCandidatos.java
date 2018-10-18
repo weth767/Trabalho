@@ -7,8 +7,13 @@ package visao;
 
 import conexao.ConexaoDrive;
 import dao.CandidatoDao;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.xml.ws.http.HTTPException;
 import uteis.Arquivo;
 
 /**
@@ -21,24 +26,35 @@ public class EnviaCandidatos extends javax.swing.JFrame {
      * Creates new form EnviaPartidos
      */
     CandidatoDao candidatoDao;
+
     public EnviaCandidatos(CandidatoDao candidatoDao) {
         this.candidatoDao = candidatoDao;
         initComponents();
         this.setTitle("Envia Candidatos");
         this.setLocationRelativeTo(null);
     }
-    
-    public void geraJson(){
-        ArrayList<Object> l = (ArrayList<Object>)(Object)candidatoDao.retornaCandidatos();
+
+    public void geraJson() {
+        ArrayList<Object> l = (ArrayList<Object>) (Object) candidatoDao.retornaCandidatos();
         Arquivo.criaArquivoJSON(l, "candidatos.json");
     }
-    public void enviaDrive(){
+
+    public void enviaDrive() {
         ConexaoDrive.getInstance();
         ConexaoDrive.criaArquivo("candidatos.json", "candidatos.json");
         JOptionPane.showMessageDialog(this, "Dados dos candidatos enviados com sucesso!\n");
     }
 
-    
+    public void apagaDrive() {
+        ConexaoDrive.getInstance();
+        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
+        for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
+            if (lista_arquivo.getName().equals("candidatos.json")) {
+                ConexaoDrive.removerArquivo(lista_arquivo.getId());
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -106,10 +122,10 @@ public class EnviaCandidatos extends javax.swing.JFrame {
 
     private void enviaCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviaCandidatoActionPerformed
         this.geraJson();
+        this.apagaDrive();
         this.enviaDrive();
     }//GEN-LAST:event_enviaCandidatoActionPerformed
 
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enviaCandidato;

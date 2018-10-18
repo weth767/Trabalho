@@ -9,7 +9,8 @@ package modelo;
  *
  * @author leandro
  */
-public class Candidato {
+public class Candidato implements Comparable {
+
     private String nome;
     private int numero;
     private String cpf;
@@ -59,6 +60,16 @@ public class Candidato {
     public void setPartido(Partido partido) {
         this.partido = partido;
     }
-    
-    
+
+    @Override
+    public int compareTo(Object objeto) {
+        Candidato candidato = (Candidato) objeto;
+        if (this.getQuantidadeVotos() < candidato.getQuantidadeVotos()) {
+            return 1;
+        }
+        if (this.getQuantidadeVotos() > candidato.getQuantidadeVotos()) {
+            return -1;
+        }
+        return 0;
+    }
 }

@@ -8,6 +8,7 @@ package visao;
 import conexao.ConexaoDrive;
 import dao.PartidoDao;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import uteis.Arquivo;
 
@@ -36,6 +37,16 @@ public class EnviaPartidos extends javax.swing.JFrame {
         ConexaoDrive.getInstance();
         ConexaoDrive.criaArquivo("partidos.json", "partidos.json");
         JOptionPane.showMessageDialog(this, "Dados dos partidos enviados com sucesso!\n");
+    }
+    
+    public void apagaDrive(){
+        ConexaoDrive.getInstance();
+        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
+        for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
+            if (lista_arquivo.getName().equals("partidos.json")) {
+                ConexaoDrive.removerArquivo(lista_arquivo.getId());
+            }
+        }
     }
 
     /**
@@ -112,6 +123,7 @@ public class EnviaPartidos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.geraJson();
+        this.apagaDrive();
         this.enviaDrive();
     }//GEN-LAST:event_jButton1ActionPerformed
 

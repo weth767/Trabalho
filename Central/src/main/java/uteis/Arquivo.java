@@ -78,7 +78,7 @@ public class Arquivo {
         }
         PrintWriter gravarArq = new PrintWriter(arq);
         for (Object l : lista) {
-            gravarArq.printf("%s", gson.toJson(l));
+            gravarArq.printf("%s\n", gson.toJson(l));
         }
         try {
             arq.close();

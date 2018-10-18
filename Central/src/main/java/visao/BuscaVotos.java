@@ -14,10 +14,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.xml.ws.http.HTTPException;
 import modelo.Candidato;
 import modelo.Voto;
@@ -33,6 +35,7 @@ public class BuscaVotos extends javax.swing.JFrame {
      * Creates new form BuscaVotos
      */
     CandidatoDao candidatoDao;
+
     public BuscaVotos(CandidatoDao candidatoDao) {
         this.candidatoDao = candidatoDao;
         initComponents();
@@ -92,8 +95,10 @@ public class BuscaVotos extends javax.swing.JFrame {
                 }
             }
         }
+        Collections.sort(arrayCandidatos);
+        DefaultTableModel model = (DefaultTableModel) tabelaVotos.getModel();
         for (Candidato candidato : arrayCandidatos) {
-            System.out.println("Quantidade = "+candidato.getQuantidadeVotos());
+            model.addRow(new Object[]{candidato.getNome(), candidato.getPartido().getNome(), candidato.getQuantidadeVotos()});
         }
     }
 
@@ -107,78 +112,104 @@ public class BuscaVotos extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jenviaEleitores = new javax.swing.JButton();
-        jlabelEleitor = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaVotos = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        botaoBaixaVotos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jenviaEleitores.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        jenviaEleitores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
-        jenviaEleitores.setText("Buscar Votos");
-        jenviaEleitores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jenviaEleitoresActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jenviaEleitores)
-                .addGap(28, 28, 28))
+            .addGap(0, 172, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jenviaEleitores)
-                .addContainerGap(39, Short.MAX_VALUE))
+            .addGap(0, 115, Short.MAX_VALUE)
         );
 
-        jlabelEleitor.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-        jlabelEleitor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlabelEleitor.setText("Votos - Drive");
-        jlabelEleitor.setToolTipText("");
+        tabelaVotos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome Candidato", "Partido", "Número Votos"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabelaVotos);
+        if (tabelaVotos.getColumnModel().getColumnCount() > 0) {
+            tabelaVotos.getColumnModel().getColumn(0).setResizable(false);
+            tabelaVotos.getColumnModel().getColumn(1).setResizable(false);
+            tabelaVotos.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Recebimento de Votos");
+
+        botaoBaixaVotos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/baixarNuvem.png"))); // NOI18N
+        botaoBaixaVotos.setText("Receber Votos");
+        botaoBaixaVotos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoBaixaVotosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlabelEleitor, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
+                .addGap(166, 166, 166)
+                .addComponent(botaoBaixaVotos, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlabelEleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botaoBaixaVotos)
+                        .addGap(31, 31, 31)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jenviaEleitoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenviaEleitoresActionPerformed
+    private void botaoBaixaVotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBaixaVotosActionPerformed
         this.criaArquivoVotos();
         this.contabilizaVotos();
         JOptionPane.showMessageDialog(this, "Dados dos votos baixados com sucesso!\n");
-    }//GEN-LAST:event_jenviaEleitoresActionPerformed
-
-
+    }//GEN-LAST:event_botaoBaixaVotosActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoBaixaVotos;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton jenviaEleitores;
-    private javax.swing.JLabel jlabelEleitor;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabelaVotos;
     // End of variables declaration//GEN-END:variables
 }

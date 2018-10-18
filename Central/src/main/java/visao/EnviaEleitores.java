@@ -8,6 +8,7 @@ package visao;
 import conexao.ConexaoDrive;
 import dao.EleitorDao;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import uteis.Arquivo;
 
@@ -37,6 +38,16 @@ public class EnviaEleitores extends javax.swing.JFrame {
         ConexaoDrive.criaArquivo("eleitores.json", "eleitores.json");
         JOptionPane.showMessageDialog(this, "Dados dos eleitores enviados com sucesso!\n");
     }
+    public void apagaDrive(){
+        ConexaoDrive.getInstance();
+        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
+        for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
+            if (lista_arquivo.getName().equals("eleitores.json")) {
+                ConexaoDrive.removerArquivo(lista_arquivo.getId());
+            }
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,6 +123,7 @@ public class EnviaEleitores extends javax.swing.JFrame {
 
     private void jenviaEleitoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenviaEleitoresActionPerformed
         this.geraJson();
+        this.apagaDrive();
         this.enviaDrive();
     }//GEN-LAST:event_jenviaEleitoresActionPerformed
 
