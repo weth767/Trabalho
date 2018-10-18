@@ -32,4 +32,9 @@ public class EleitorDao{
     public ArrayList<Eleitor> retornaEleitores(){
         return this.eleitores;
     }  
+    public void appendArrayList(ArrayList<Eleitor> eleitores){
+        for (Eleitor eleitor : eleitores) {
+            this.eleitores.add(eleitor);
+        }
+    }
 }

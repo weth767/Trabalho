@@ -5,14 +5,11 @@
  */
 package dao;
 
-import com.google.gson.Gson;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import modelo.Partido;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import modelo.Eleitor;
+
 
 /**
  *
@@ -44,5 +41,10 @@ public class PartidoDao {
             }
         }
         return null;
+    }
+    public void appendArrayList(ArrayList<Partido> partidos){
+        for (Partido partido : partidos) {
+            this.partidos.add(partido);
+        }
     }
 }

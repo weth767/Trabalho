@@ -6,7 +6,6 @@
 package dao;
 
 import modelo.Candidato;
-import com.google.gson.Gson;
 import java.util.ArrayList;
 
 /**
@@ -31,5 +30,11 @@ public class CandidatoDao {
     }
     public ArrayList<Candidato> retornaCandidatos(){
         return this.candidatos;
+    }
+    
+    public void appendArrayList(ArrayList<Candidato> candidatos){
+        for (Candidato candidato : candidatos) {
+            this.candidatos.add(candidato);
+        }
     }
 }

@@ -5,13 +5,28 @@
  */
 package visao;
 
-
-
+import com.google.gson.Gson;
+import conexao.ConexaoDrive;
 import dao.CandidatoDao;
 import dao.EleitorDao;
 import dao.PartidoDao;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import static java.lang.Thread.sleep;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
-
+import javax.swing.JOptionPane;
+import javax.xml.ws.http.HTTPException;
+import modelo.Candidato;
+import modelo.Eleitor;
+import modelo.Partido;
+import uteis.Arquivo;
 
 /**
  *
@@ -25,13 +40,147 @@ public class Menu extends javax.swing.JFrame {
     PartidoDao partidoDao = new PartidoDao();
     EleitorDao eleitorDao = new EleitorDao();
     CandidatoDao candidatoDao = new CandidatoDao();
+
     public Menu() {
         initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setLocationRelativeTo(null);
-        this.setTitle("Central");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
+        setTitle("Central");
     }
-    
+
+    public void atualizaDados() {
+        criaArquivoCandidatos();
+        criaArquivoPartidos();
+        criaArquivoEleitores();
+        candidatoDao.appendArrayList(geraObjetoCandidato());
+        partidoDao.appendArrayList(geraObjetoPartido());
+        eleitorDao.appendArrayList(geraObjetoEleitores());
+        JOptionPane.showMessageDialog(this, "Dados atualizados com sucesso","Sucesso", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void criaArquivoEleitores() {
+        ConexaoDrive.getInstance();
+        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
+        for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
+            if (lista_arquivo.getName().equals("eleitores.json")) {
+                try {
+                    String conteudo = ConexaoDrive.leArquivoGD(lista_arquivo.getId());
+                    Arquivo.criaArquivo(conteudo, "eleitores.json");
+                    return;
+                } catch (IOException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (HTTPException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return;
+            }
+        }
+    }
+
+    public void criaArquivoCandidatos() {
+        ConexaoDrive.getInstance();
+        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
+        for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
+            if (lista_arquivo.getName().equals("candidatos.json")) {
+                try {
+                    String conteudo = ConexaoDrive.leArquivoGD(lista_arquivo.getId());
+                    Arquivo.criaArquivo(conteudo, "candidatos.json");
+
+                    return;
+                } catch (IOException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (HTTPException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return;
+            }
+        }
+    }
+
+    public void criaArquivoPartidos() {
+        ConexaoDrive.getInstance();
+        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
+        for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
+            if (lista_arquivo.getName().equals("partidos.json")) {
+                try {
+                    String conteudo = ConexaoDrive.leArquivoGD(lista_arquivo.getId());
+                    Arquivo.criaArquivo(conteudo, "partidos.json");
+                    return;
+                } catch (IOException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (HTTPException ex) {
+                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return;
+            }
+        }
+    }
+
+    public ArrayList<Candidato> geraObjetoCandidato() {
+        Gson gson = new Gson();
+        FileInputStream arquivoEntrada;
+        ArrayList<Candidato> candidatos = null;
+        try {
+            arquivoEntrada = new FileInputStream("candidatos.json");
+            BufferedReader leitor = new BufferedReader(new InputStreamReader(arquivoEntrada));
+            candidatos = new ArrayList();
+            String strLine;
+            while ((strLine = leitor.readLine()) != null) {
+                candidatos.add(gson.fromJson(strLine, Candidato.class));
+            }
+            leitor.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro, arquivo não localizado!");
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return candidatos;
+    }
+
+    public ArrayList<Partido> geraObjetoPartido() {
+        Gson gson = new Gson();
+        FileInputStream arquivoEntrada;
+        ArrayList<Partido> partidos = null;
+        try {
+            arquivoEntrada = new FileInputStream("partidos.json");
+            BufferedReader leitor = new BufferedReader(new InputStreamReader(arquivoEntrada));
+            partidos = new ArrayList();
+            String strLine;
+            while ((strLine = leitor.readLine()) != null) {
+                partidos.add(gson.fromJson(strLine, Partido.class));
+            }
+            leitor.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return partidos;
+    }
+
+    public ArrayList<Eleitor> geraObjetoEleitores() {
+        Gson gson = new Gson();
+        FileInputStream arquivoEntrada;
+        ArrayList<Eleitor> eleitores = null;
+        try {
+            arquivoEntrada = new FileInputStream("eleitores.json");
+            BufferedReader leitor = new BufferedReader(new InputStreamReader(arquivoEntrada));
+            eleitores = new ArrayList();
+            String strLine;
+            while ((strLine = leitor.readLine()) != null) {
+                eleitores.add(gson.fromJson(strLine, Eleitor.class));
+            }
+            leitor.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro, arquivo não localizado!");
+            this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return eleitores;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +190,7 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Cadastros = new javax.swing.JMenu();
@@ -53,6 +203,9 @@ public class Menu extends javax.swing.JFrame {
         drivePartido = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         driveVotos = new javax.swing.JMenuItem();
+        driveAtualiza = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,6 +294,16 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(driveVotos);
 
+        driveAtualiza.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        driveAtualiza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
+        driveAtualiza.setText("Atualiza Dados");
+        driveAtualiza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                driveAtualizaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(driveAtualiza);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -170,11 +333,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_cadEleitorActionPerformed
 
     private void cadCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadCandidatoActionPerformed
-        new CadastraCandidato(candidatoDao,partidoDao).setVisible(true);
+        new CadastraCandidato(candidatoDao, partidoDao).setVisible(true);
     }//GEN-LAST:event_cadCandidatoActionPerformed
 
     private void cadPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadPartidoActionPerformed
-         new CadastraPartido(partidoDao).setVisible(true);
+        new CadastraPartido(partidoDao).setVisible(true);
     }//GEN-LAST:event_cadPartidoActionPerformed
 
     private void drivePartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drivePartidoActionPerformed
@@ -192,6 +355,10 @@ public class Menu extends javax.swing.JFrame {
     private void driveVotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_driveVotosActionPerformed
         new BuscaVotos(candidatoDao).setVisible(true);
     }//GEN-LAST:event_driveVotosActionPerformed
+
+    private void driveAtualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_driveAtualizaActionPerformed
+        this.atualizaDados();
+    }//GEN-LAST:event_driveAtualizaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,6 +399,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem cadCandidato;
     private javax.swing.JMenuItem cadEleitor;
     private javax.swing.JMenuItem cadPartido;
+    private javax.swing.JMenuItem driveAtualiza;
     private javax.swing.JMenuItem driveCandidato;
     private javax.swing.JMenuItem driveEleitor;
     private javax.swing.JMenuItem drivePartido;
@@ -239,6 +407,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jMenuUpload;
     // End of variables declaration//GEN-END:variables
 }
