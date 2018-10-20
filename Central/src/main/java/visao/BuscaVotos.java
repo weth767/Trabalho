@@ -39,6 +39,7 @@ public class BuscaVotos extends javax.swing.JFrame {
     public BuscaVotos(CandidatoDao candidatoDao) {
         this.candidatoDao = candidatoDao;
         initComponents();
+        botaoGeraGrafico.setEnabled(false);
         this.setTitle("Busca Votos");
         this.setLocationRelativeTo(null);
     }
@@ -86,18 +87,16 @@ public class BuscaVotos extends javax.swing.JFrame {
 
     public void contabilizaVotos() {
         ArrayList<Voto> votos = this.geraObjetoVotacao();
-        ArrayList<Candidato> arrayCandidatos;
-        arrayCandidatos = candidatoDao.retornaCandidatos();
         for (Voto voto : votos) {
-            for (Candidato candidato : arrayCandidatos) {
+            for (Candidato candidato : candidatoDao.retornaCandidatos()) {
                 if (voto.getCandidato().getNumero() == candidato.getNumero()) {
                     candidato.setQuantidadeVotos(candidato.getQuantidadeVotos() + 1);
                 }
             }
         }
-        Collections.sort(arrayCandidatos);
+        Collections.sort(candidatoDao.retornaCandidatos());
         DefaultTableModel model = (DefaultTableModel) tabelaVotos.getModel();
-        for (Candidato candidato : arrayCandidatos) {
+        for (Candidato candidato : candidatoDao.retornaCandidatos()) {
             model.addRow(new Object[]{candidato.getNome(), candidato.getPartido().getNome(), candidato.getQuantidadeVotos()});
         }
     }
@@ -115,7 +114,8 @@ public class BuscaVotos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaVotos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        botaoBaixaVotos = new javax.swing.JButton();
+        botaoGeraGrafico = new javax.swing.JButton();
+        botaoBaixaVotos1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -157,11 +157,19 @@ public class BuscaVotos extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Recebimento de Votos");
 
-        botaoBaixaVotos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/baixarNuvem.png"))); // NOI18N
-        botaoBaixaVotos.setText("Receber Votos");
-        botaoBaixaVotos.addActionListener(new java.awt.event.ActionListener() {
+        botaoGeraGrafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/grafico.png"))); // NOI18N
+        botaoGeraGrafico.setText("Gerar Gráfico");
+        botaoGeraGrafico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoBaixaVotosActionPerformed(evt);
+                botaoGeraGraficoActionPerformed(evt);
+            }
+        });
+
+        botaoBaixaVotos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/baixarNuvem.png"))); // NOI18N
+        botaoBaixaVotos1.setText("Receber Votos");
+        botaoBaixaVotos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoBaixaVotos1ActionPerformed(evt);
             }
         });
 
@@ -170,8 +178,10 @@ public class BuscaVotos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(botaoBaixaVotos, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(175, 175, 175)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botaoGeraGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoBaixaVotos1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -188,25 +198,35 @@ public class BuscaVotos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(botaoBaixaVotos)
-                        .addGap(31, 31, 31)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botaoBaixaVotos1)
+                        .addGap(18, 18, 18)
+                        .addComponent(botaoGeraGrafico)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoBaixaVotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBaixaVotosActionPerformed
+    private void botaoGeraGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGeraGraficoActionPerformed
+        new MostraGraficos(candidatoDao).setVisible(true);
+    }//GEN-LAST:event_botaoGeraGraficoActionPerformed
+
+    private void botaoBaixaVotos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBaixaVotos1ActionPerformed
         this.criaArquivoVotos();
         this.contabilizaVotos();
         JOptionPane.showMessageDialog(this, "Dados dos votos baixados com sucesso!\n");
-    }//GEN-LAST:event_botaoBaixaVotosActionPerformed
+        if(tabelaVotos.getRowCount() > 0){
+            botaoGeraGrafico.setEnabled(true);
+        }
+    }//GEN-LAST:event_botaoBaixaVotos1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoBaixaVotos;
+    private javax.swing.JButton botaoBaixaVotos1;
+    private javax.swing.JButton botaoGeraGrafico;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
