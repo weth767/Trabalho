@@ -1,61 +1,78 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 /**
  *
- * @author leandro
+ * @author João Paulo e Leandro
  */
 public class Eleitor {
-    private String titulo_eleitor;
-    private String nome;
-    private String cpf;
-    private Integer matriz_imagem[][];
-    private int numero_urna;
+    private String titulo_eleitor; //Titulo de eleitor 
+    private String nome; //Nome do eleitor
+    private String cpf; //CPF do eleitor
+    private Integer matriz_imagem[][]; //Matriz para armazenar a imagem PPM do eleitor
+    private int numero_urna; //Numero da Urna que o eleitor Vota
 
-
-    public Eleitor() {
-    }
-    
+    /** 
+     * @return String Um valor String contendo o titulo de eleitor do eleitor.
+    */    
     public String getTitulo_eleitor() {
         return titulo_eleitor;
     }
-
+    /**
+     * @param String Um valor do tipo String, para ser inserido o titulo de eleitor.
+     * @return void.
+    */
     public void setTitulo_eleitor(String titulo_eleitor) {
         this.titulo_eleitor = titulo_eleitor;
     }
-
+    /** 
+     * @return String Um valor String contendo o nome do eleitor.
+    */ 
     public String getNome() {
         return nome;
     }
-
+    /** 
+     * @param String Um valor do tipo String, para ser inserido o nome do eleitor.
+     * @return void.
+    */
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    /** 
+     * @return String Um valor String contendo o CPF do eleitor.
+    */ 
     public String getCpf() {
         return cpf;
     }
-
+    /** 
+     * @param String Um valor do tipo String, para ser inserido o CPF do eleitor.
+     * @return void.
+    */
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
+    /** 
+     * @return Integer[][] Uma matiriz de Integer contendo a imagem PPM do eleitor.
+    */ 
     public Integer[][] getMatriz_imagem() {
         return matriz_imagem;
     }
-
+    /** 
+     * @param Integer[][] Uma matriz do tipo Integer, para ser inserido a imagem PPM do eleitor.
+     * @return void.
+    */
     public void setMatriz_imagem(Integer[][] matriz_imagem) {
         this.matriz_imagem = matriz_imagem;
     }
-
+    /** 
+     * @return int Uma valor de int contendo o numero da urna do eleitor.
+    */
     public int getNumero_urna() {
         return numero_urna;
     }
-
+    /** 
+     * @param int Um valor do tipo int, para ser inserido a numeroda urna do eleitor.
+     * @return void.
+    */
     public void setNumero_urna(int numero_urna) {
         this.numero_urna = numero_urna;
     }    

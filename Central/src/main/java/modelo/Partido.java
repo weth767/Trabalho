@@ -1,30 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 /**
  *
- * @author leandro
+ * @author João Paulo e Leandro
  */
 public class Partido {
-    private int numero;
-    private String nome;
+    private int numero;//Numero do partido
+    private String nome;//Nome do partido
 
+    /** 
+     * @return int Um valor int contendo o numero do partido.
+    */ 
     public int getNumero() {
         return numero;
     }
-
+    /**
+     * @param int Um valor do tipo int, para ser inserido o numero do partido.
+     * @return void.
+    */
     public void setNumero(int numero) {
         this.numero = numero;
     }
-
+    /** 
+     * @return String Um valor String contendo o nome do partido.
+    */
     public String getNome() {
         return nome;
     }
-
+    /**
+     * @param String Um valor do tipo String, para ser inserido o nome do partido.
+     * @return void.
+    */
     public void setNome(String nome) {
         this.nome = nome;
     }
