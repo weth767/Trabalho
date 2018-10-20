@@ -14,7 +14,7 @@ public class Voto {
         return candidato;
     }
     /**
-     * @param Candidato Um objeto do tipo Candidato, para ser inserido o voto do candidato.
+     * @param candidato Um objeto do tipo Candidato, para ser inserido o voto do candidato.
      * @return void.
     */
     public void setCandidato(Candidato candidato) {

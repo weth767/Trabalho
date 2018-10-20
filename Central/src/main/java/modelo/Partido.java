@@ -15,7 +15,7 @@ public class Partido {
         return numero;
     }
     /**
-     * @param int Um valor do tipo int, para ser inserido o numero do partido.
+     * @param numero Um valor do tipo int, para ser inserido o numero do partido.
      * @return void.
     */
     public void setNumero(int numero) {
@@ -28,7 +28,7 @@ public class Partido {
         return nome;
     }
     /**
-     * @param String Um valor do tipo String, para ser inserido o nome do partido.
+     * @param nome Um valor do tipo String, para ser inserido o nome do partido.
      * @return void.
     */
     public void setNome(String nome) {

@@ -16,13 +16,13 @@ public class Candidato implements Comparable {//implements Comparable para orden
         this.quantidadeVotos = 0;//ao instanciar o objeto de candidatos atribui sua quantidade de votos para 0
     }
     /** 
-     * @return Int Um valor inteiro contendo a quanidade de votos que o candidato possui.
+     * @return Int Um valor int contendo a quanidade de votos que o candidato possui.
     */
     public int getQuantidadeVotos() {
         return quantidadeVotos;
     }
     /** 
-     * @param int Um valor do tipo inteiro, para ser inserido na quantidade de votos que o candidato possui.
+     * @param quantidadeVotos Um valor do tipo int, para ser inserido na quantidade de votos que o candidato possui.
      * @return void.
     */
     public void setQuantidadeVotos(int quantidadeVotos) {
@@ -35,7 +35,7 @@ public class Candidato implements Comparable {//implements Comparable para orden
         return nome;
     }
     /** 
-     * @param String Um valor do tipo String, para ser inserido no nome do candidato possui.
+     * @param nome Um valor do tipo String, para ser inserido no nome do candidato possui.
      * @return void.
     */
     public void setNome(String nome) {
@@ -48,7 +48,7 @@ public class Candidato implements Comparable {//implements Comparable para orden
         return numero;
     }
     /** 
-     * @param int Um valor do tipo int, para ser inserido o numero do candidato.
+     * @param numero Um valor do tipo int, para ser inserido o numero do candidato.
      * @return void.
     */
     public void setNumero(int numero) {
@@ -61,7 +61,7 @@ public class Candidato implements Comparable {//implements Comparable para orden
         return cpf;
     }
     /** 
-     * @param String Um valor do tipo String, para ser inserido o CPF do candidato.
+     * @param cpf Um valor do tipo String, para ser inserido o CPF do candidato.
      * @return void.
     */
     public void setCpf(String cpf) {
@@ -74,14 +74,14 @@ public class Candidato implements Comparable {//implements Comparable para orden
         return partido;
     }
     /** 
-     * @param Partido Um Obejto do tipo Partido, para ser inserido o Partido do candidato.
+     * @param partido Um Obejto do tipo Partido, para ser inserido o Partido do candidato.
      * @return void.
     */
     public void setPartido(Partido partido) {
         this.partido = partido;
     }
     /** 
-     * @param Object Um Objeto do tipo Object que sera convertido para o tipo candidato, para ser comparado com base na quantidade de votos e assim ordenar o array de em ordem decrescente
+     * @param objeto Um Objeto do tipo Object que sera convertido para o tipo candidato, para ser comparado com base na quantidade de votos e assim ordenar o array de em ordem decrescente
      * @return void.
     */
     @Override

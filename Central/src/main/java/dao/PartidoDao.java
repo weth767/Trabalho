@@ -22,14 +22,14 @@ public class PartidoDao {
         partidos = new ArrayList();//instacia o arraylist para que partidos possam ser inseridos
     }
     /** 
-     * @param Partido Um objeto do tipo partido, para ser inserido no arraylist.
+     * @param partido Um objeto do tipo partido, para ser inserido no arraylist.
      * @return void.
     */
     public void cadastraPartido(Partido partido){
         this.partidos.add(partido);
     }
     /** 
-     * @param Partido Um objeto do tipo partido, para ser removido do arraylist.
+     * @param partido Um objeto do tipo partido, para ser removido do arraylist.
      * @return void.
     */
     public void removePartido(Partido partido){
@@ -46,7 +46,7 @@ public class PartidoDao {
         return this.partidos;
     }
     /** 
-     * @param String Uma String contendo o nome do partido a ser procurado no array.
+     * @param nome Uma String contendo o nome do partido a ser procurado no array.
      * @return Partido.
     */
     public Partido retornaPartido(String nome){
@@ -58,7 +58,7 @@ public class PartidoDao {
         return null;//retorna NULL caso nao encontre o partido
     }
     /** 
-     * @param ArrayList<Partido> Um arraylist do tipo Partido, para ser atribuido no arraylist da classse.
+     * @param partidos Um arraylist do tipo Partido, para ser atribuido no arraylist da classse.
      * @return void.
     */
     public void appendArrayList(ArrayList<Partido> partidos){

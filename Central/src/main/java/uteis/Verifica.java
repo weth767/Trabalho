@@ -7,20 +7,24 @@ package uteis;
 
 /**
  *
- * @author weth
+ * @author João Paulo e Leandro
  */
 public class Verifica {
 
+
+    /**
+     * @param caminho Um valor do tipo String, contendo o CPF que sera validado.
+     * @return boolean, uma valor boolean dizendo se o CPF passado eh valido (TRUE) ou invalido(FALSE).
+    */
     public static boolean validaCPF(String Cpf) {
-        Cpf = Cpf.replaceAll("[\\.-]", "");
+        Cpf = Cpf.replaceAll("[\\.-]", "");//quebra a string deixando apenas numeros
 
         if ((Cpf.equals("00000000000")) || (Cpf.equals("11111111111")) || (Cpf.equals("22222222222")) || (Cpf.equals("33333333333"))
                 || (Cpf.equals("44444444444")) || (Cpf.equals("55555555555")) || (Cpf.equals("66666666666")) || (Cpf.equals("77777777777"))
-                || (Cpf.equals("88888888888")) || (Cpf.equals("99999999999"))) {
-
-            return false;
-        } else {
-
+                || (Cpf.equals("88888888888")) || (Cpf.equals("99999999999"))) {//Como numeros inteiramente identicos sao validos eles devem ser capturados de forma pratica
+            return false;//retorna false
+        } else {//valida o CPF
+        
             String s1, s2, s3, s4, s5, s6, s7, s8, s9, confere = "";
             int n1, n2, n3, n4, n5, n6, n7, n8, n9, verificador1, verificador2;
 
@@ -63,10 +67,10 @@ public class Verifica {
 
             confere = (s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8 + s9 + verificador1 + verificador2);
 
-            if (confere.equals(Cpf)) {
-                return true;
-            } else {
-                return false;
+            if (confere.equals(Cpf)) {//Caso o CPF seja valido
+                return true;//retorna TRUE
+            } else {//se nao
+                return false;//retorna FALSE
             }
         }
     }
