@@ -6,7 +6,6 @@
 package visao;
 
 import dao.CandidatoDao;
-import java.util.ArrayList;
 import javax.swing.JPanel;
 import modelo.Candidato;
 import org.jfree.chart.ChartFactory;

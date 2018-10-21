@@ -8,7 +8,6 @@ package dao;
 
 import modelo.Partido;
 import java.util.ArrayList;
-import modelo.Eleitor;
 
 
 /**

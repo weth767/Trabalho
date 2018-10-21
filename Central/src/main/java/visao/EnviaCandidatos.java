@@ -7,13 +7,9 @@ package visao;
 
 import conexao.ConexaoDrive;
 import dao.CandidatoDao;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.xml.ws.http.HTTPException;
 import uteis.Arquivo;
 
 /**
