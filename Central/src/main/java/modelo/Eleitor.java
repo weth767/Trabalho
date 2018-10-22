@@ -19,7 +19,7 @@ public class Eleitor {
     }
     /**
      * @param titulo_eleitor Um valor do tipo String, para ser inserido o titulo de eleitor.
-     * @return void.
+     *  .
     */
     public void setTitulo_eleitor(String titulo_eleitor) {
         this.titulo_eleitor = titulo_eleitor;
@@ -32,7 +32,7 @@ public class Eleitor {
     }
     /** 
      * @param nome Um valor do tipo String, para ser inserido o nome do eleitor.
-     * @return void.
+     *  .
     */
     public void setNome(String nome) {
         this.nome = nome;
@@ -45,7 +45,7 @@ public class Eleitor {
     }
     /** 
      * @param cpf Um valor do tipo String, para ser inserido o CPF do eleitor.
-     * @return void.
+     *  .
     */
     public void setCpf(String cpf) {
         this.cpf = cpf;
@@ -58,7 +58,7 @@ public class Eleitor {
     }
     /** 
      * @param matriz_imagem Uma matriz do tipo Integer, para ser inserido a imagem PPM do eleitor.
-     * @return void.
+     *  .
     */
     public void setMatriz_imagem(Integer[][] matriz_imagem) {
         this.matriz_imagem = matriz_imagem;
@@ -71,7 +71,7 @@ public class Eleitor {
     }
     /** 
      * @param numero_urna Um valor do tipo int, para ser inserido a numeroda urna do eleitor.
-     * @return void.
+     *  .
     */
     public void setNumero_urna(int numero_urna) {
         this.numero_urna = numero_urna;

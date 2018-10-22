@@ -40,7 +40,6 @@ public class Menu extends javax.swing.JFrame {
     private EleitorDao eleitorDao = new EleitorDao();
     private CandidatoDao candidatoDao = new CandidatoDao();
     /**Construtor do Frame
-     *@param candidatoDao, instancia do Dao da classe de candidatos
      *@version 3.0
      */
     public Menu() {
@@ -50,7 +49,7 @@ public class Menu extends javax.swing.JFrame {
         setTitle("Central");
     }
     /**Metodo reponsavel por as informacoes contidas no drive e nao localmente
-     *@return void
+     * 
      *@version 1.0
      */
     public void atualizaDados() {
@@ -65,7 +64,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     /**Metodo reponsavel por criar arquivo de eleitores localmente
-     *@return void
+     * 
      *@version 1.0
      */
     public void criaArquivoEleitores() {
@@ -87,7 +86,7 @@ public class Menu extends javax.swing.JFrame {
         }
     }
     /**Metodo reponsavel por criar arquivo de candidatos localmente
-     *@return void
+     * 
      *@version 1.0
      */
     public void criaArquivoCandidatos() {
@@ -110,7 +109,7 @@ public class Menu extends javax.swing.JFrame {
         }
     }
     /**Metodo reponsavel por criar arquivo de partidos localmente
-     *@return void
+     * 
      *@version 1.0
      */
     public void criaArquivoPartidos() {
@@ -132,7 +131,7 @@ public class Menu extends javax.swing.JFrame {
         }
     }
     /**Metodo reponsavel por gerar objeto de candidatos com base no arquivo local
-     *@return ArrayList<Candidato>, um array contendo todos os candidatos cadastrados
+     * @return ArrayList, um array contendo todos os candidatos cadastrados
      *@version 1.0
      */
     public ArrayList<Candidato> geraObjetoCandidato() {
@@ -157,7 +156,7 @@ public class Menu extends javax.swing.JFrame {
         return candidatos;
     }
     /**Metodo reponsavel por gerar objeto de partidos com base no arquivo local
-     *@return ArrayList<Partido>, um array contendo todos os Partidos cadastrados
+     * @return ArrayList, um array contendo todos os Partidos cadastrados
      *@version 1.0
      */
     public ArrayList<Partido> geraObjetoPartido() {
@@ -181,7 +180,7 @@ public class Menu extends javax.swing.JFrame {
         return partidos;
     }
     /**Metodo reponsavel por gerar objeto de eleitores com base no arquivo local
-     *@return ArrayList<Eleitor>, um array contendo todos os eleitores cadastrados
+     * @return ArrayList, um array contendo todos os eleitores cadastrados
      *@version 1.0
      */
     public ArrayList<Eleitor> geraObjetoEleitores() {

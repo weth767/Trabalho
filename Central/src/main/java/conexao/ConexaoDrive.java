@@ -50,9 +50,7 @@ public class ConexaoDrive {
      * transporte, nesse caso HTTP
      * @return Credential, Retorna a credencial para a conexão segura com a
      * conta do google drive
-     * @throw Pode "lançar" uma exceção do tipo entrada e saída Baseado nas
      * funções do Java QuickStart Api para Google Drive 
-     * @link https://developers.google.com/drive/api/v3/quickstart/java
      */
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         /*busca o arquivo de credenciais da conta*/
@@ -114,13 +112,10 @@ public class ConexaoDrive {
      * Método para criar um diretorio dentro da pasta principal do google drive
      *
      * @author João Paulo e Leandro
-     * @param String, nome da pasta/diretório a ser criado dentro da pasta do
+     * @param nome, nome da pasta/diretório a ser criado dentro da pasta do
      * google drive
-     * @return void
+     *  
      * @version 1.0
-     * @throw Exceção IO, caso não consiga enviar a pasta ao drive Baseado nas
-     * funções do Java QuickStart Api para Google Drive 
-     * @link https://developers.google.com/drive/api/v3/quickstart/java
      */
     public static void criaPasta(String nome) {
         /*cria o arquivo*/
@@ -141,14 +136,11 @@ public class ConexaoDrive {
      * Método para criar arquivo JSON dentro da pasta do google drive
      *
      * @author João Paulo e Leandro
-     * @param String, Recebe uma String com o nome que será dado ao arquivo JSON
+     * @param nome, Recebe uma String com o nome que será dado ao arquivo JSON
      * no drive
-     * @param String, Recebe o camainho do arquivo que será enviado ao Drive
-     * @return void
-     * @version 2.0
-     * @throw Exceção IO, caso não consiga enviar o arquivo ao drive Baseado nas
-     * funções do Java QuickStart Api para Google Drive 
-     * @link https://developers.google.com/drive/api/v3/quickstart/java
+     * @param caminho, Recebe o camainho do arquivo que será enviado ao Drive
+     *  
+     * @version 2.0 funções do Java QuickStart Api para Google Drive 
      */
     public static void criaArquivo(String nome, String caminho) {
         /*cria o arquivo*/
@@ -177,9 +169,7 @@ public class ConexaoDrive {
      *
      * @author João Paulo e Leandro
      * @return Lista de arquivos contidos na conta do google drive
-     * @throw Exceção IO, caso não consiga buscar os arquivos
      * @version 1.0 Baseado nas funções do Java QuickStart Api para Google Drive
-     * @link https://developers.google.com/drive/api/v3/quickstart/java
      */
     public static List<File> listaArquivos() {
         /*cria uma lista de arquivos*/
@@ -201,11 +191,9 @@ public class ConexaoDrive {
      * Método que remove um arquivo do drive de acordo com o seu id
      *
      * @author João Paulo e Leandro
-     * @param String, ID do arquivo a ser removido
-     * @return void
-     * @throw Exceção IO, caso não consiga remover o arquivo
+     * @param id, ID do arquivo a ser removido
+     *  
      * @version 1.2 Baseado nas funções do Java QuickStart Api para Google Drive
-     * @link https://developers.google.com/drive/api/v3/quickstart/java
      */
     public static void removerArquivo(String id) {
         /*recebe o ID do arquivo a ser deletado*/
@@ -223,9 +211,9 @@ public class ConexaoDrive {
      *
      * @author João Paulo e Leandro
      * @version 3.0 Baseado nas funções do Java QuickStart Api para Google Drive
-     * @link https://developers.google.com/drive/api/v3/quickstart/java
-     * @param String, ID do arquivo a ser lido do Google Drive
+     * @param arquivoID, ID do arquivo a ser lido do Google Drive
      * @return String, retorna o texto contido no arquivo
+     * @throws java.io.IOException Caso nao encontre o arquivo a ser lido mostra erro
      */
     public static String leArquivoGD(String arquivoID) throws IOException, HTTPException {
         /*cria uma array de dados de saída*/
@@ -242,12 +230,10 @@ public class ConexaoDrive {
      *
      * @author João Paulo e Leandro
      * @version 1.0
-     * @param String, ID do arquivo que mudará de pasta
-     * @param String, ID da pasta que receberá o arquivo
-     * @return void
-     * @throw Exceção IO, caso não consiga trocar a pasta do arquivo Baseado nas
+     * @param arquivoID, ID do arquivo que mudará de pasta
+     * @param pastaID, ID da pasta que receberá o arquivo
+     *  
      * funções do Java QuickStart Api para Google Drive 
-     * @link https://developers.google.com/drive/api/v3/quickstart/java
      */
     public static void mudaArquivoPasta(String arquivoID, String pastaID) {
         File file = null;

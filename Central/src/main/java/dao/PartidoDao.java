@@ -22,14 +22,14 @@ public class PartidoDao {
     }
     /** 
      * @param partido Um objeto do tipo partido, para ser inserido no arraylist.
-     * @return void.
+     *  .
     */
     public void cadastraPartido(Partido partido){
         this.partidos.add(partido);
     }
     /** 
      * @param partido Um objeto do tipo partido, para ser removido do arraylist.
-     * @return void.
+     *  .
     */
     public void removePartido(Partido partido){
         for (Partido p : partidos) {//varre o arraylist
@@ -39,7 +39,7 @@ public class PartidoDao {
         }
     }
     /** 
-     * @return ArrayList<Partido> um array contendo todos o partidos cadastrados.
+     *  @return ArrayList um array contendo todos o partidos cadastrados.
     */
     public ArrayList<Partido> retornaPartidos(){
         return this.partidos;
@@ -58,7 +58,7 @@ public class PartidoDao {
     }
     /** 
      * @param partidos Um arraylist do tipo Partido, para ser atribuido no arraylist da classse.
-     * @return void.
+     *  .
     */
     public void appendArrayList(ArrayList<Partido> partidos){
         for (Partido partido : partidos) {

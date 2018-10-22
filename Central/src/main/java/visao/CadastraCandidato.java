@@ -49,15 +49,16 @@ public class CadastraCandidato extends javax.swing.JFrame {
 
     }
     /**Metodo reponsavel por mostrar mensagem de erro por falta de partidos
-     *@return void
+     * 
      *@version 1.0
      */
     public void mostra_erro() {
         JOptionPane.showConfirmDialog(this, "Não existe partidos cadastrados, cadaste um partido para continuar", "Erro Partido", JOptionPane.ERROR_MESSAGE);
     }
     /**Metodo reponsavel por preencher o compo de partidos
-     *@return void
+     * 
      *@version 2.0
+     *@param arrayPartido array de partido com os dados preenchidos
      */
     public void preenchePartidoCombo(ArrayList<Partido> arrayPartido) {
         for (Partido partido : arrayPartido) {
@@ -103,7 +104,7 @@ public class CadastraCandidato extends javax.swing.JFrame {
     }
 
     /**Metodo reponsavel por limpar os campos
-     *@return void
+     * 
      *@version 1.0
      */
     public void limparCampos() {

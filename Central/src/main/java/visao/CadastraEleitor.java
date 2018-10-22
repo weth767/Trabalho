@@ -56,7 +56,7 @@ public class CadastraEleitor extends javax.swing.JFrame {
     }
     
     /**Metodo reponsavel por limpar os campos
-     *@return void
+     * 
      *@version 1.0
      */
     public void limparCampos() {

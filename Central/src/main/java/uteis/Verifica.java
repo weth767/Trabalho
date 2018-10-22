@@ -13,7 +13,7 @@ public class Verifica {
 
 
     /**
-     * @param caminho Um valor do tipo String, contendo o CPF que sera validado.
+     * @param Cpf Um valor do tipo String, contendo o CPF que sera validado.
      * @return boolean, uma valor boolean dizendo se o CPF passado eh valido (TRUE) ou invalido(FALSE).
     */
     public static boolean validaCPF(String Cpf) {

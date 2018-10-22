@@ -44,7 +44,7 @@ public class BuscaVotos extends javax.swing.JFrame {
     }
     /**Responsavel por criar arquivos de votos
      *@version 4.0
-     *@return void
+     * 
      */
     public void criaArquivoVotos() {
         ConexaoDrive.getInstance();//gerar uma conexao com o drive
@@ -67,7 +67,8 @@ public class BuscaVotos extends javax.swing.JFrame {
 
     /**Metodo responsavel por gerar um objeto com base no arquivo local
      *@version 4.0
-     *@return void
+     *@return ArrayList
+     * 
      */
     public ArrayList<Voto> geraObjetoVotacao() {
         Gson gson = new Gson();//Instancia de Gson para ler arquivo Json
@@ -93,7 +94,7 @@ public class BuscaVotos extends javax.swing.JFrame {
 
     /**Responsavel por contabilizar votos
      *@version 4.0
-     *@return void
+     * 
      */
     public void contabilizaVotos() {
         ArrayList<Voto> votos = this.geraObjetoVotacao();//gera objeto de votos e armazena todos no arraylist

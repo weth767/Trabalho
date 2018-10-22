@@ -43,7 +43,7 @@ public class CadastraPartido extends javax.swing.JFrame {
         return partido;
     }
     /**Metodo reponsavel por limpar os campos
-     *@return void
+     * 
      *@version 1.0
      */
     public void limparCampos(){
@@ -247,9 +247,7 @@ public class CadastraPartido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNumeroActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonCadastrar;

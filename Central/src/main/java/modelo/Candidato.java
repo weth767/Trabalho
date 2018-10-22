@@ -23,7 +23,7 @@ public class Candidato implements Comparable {//implements Comparable para orden
     }
     /** 
      * @param quantidadeVotos Um valor do tipo int, para ser inserido na quantidade de votos que o candidato possui.
-     * @return void.
+     *  .
     */
     public void setQuantidadeVotos(int quantidadeVotos) {
         this.quantidadeVotos = quantidadeVotos;
@@ -36,7 +36,7 @@ public class Candidato implements Comparable {//implements Comparable para orden
     }
     /** 
      * @param nome Um valor do tipo String, para ser inserido no nome do candidato possui.
-     * @return void.
+     *  .
     */
     public void setNome(String nome) {
         this.nome = nome;
@@ -49,7 +49,7 @@ public class Candidato implements Comparable {//implements Comparable para orden
     }
     /** 
      * @param numero Um valor do tipo int, para ser inserido o numero do candidato.
-     * @return void.
+     *  .
     */
     public void setNumero(int numero) {
         this.numero = numero;
@@ -62,7 +62,7 @@ public class Candidato implements Comparable {//implements Comparable para orden
     }
     /** 
      * @param cpf Um valor do tipo String, para ser inserido o CPF do candidato.
-     * @return void.
+     *  .
     */
     public void setCpf(String cpf) {
         this.cpf = cpf;
@@ -75,14 +75,14 @@ public class Candidato implements Comparable {//implements Comparable para orden
     }
     /** 
      * @param partido Um Obejto do tipo Partido, para ser inserido o Partido do candidato.
-     * @return void.
+     *  .
     */
     public void setPartido(Partido partido) {
         this.partido = partido;
     }
     /** 
      * @param objeto Um Objeto do tipo Object que sera convertido para o tipo candidato, para ser comparado com base na quantidade de votos e assim ordenar o array de em ordem decrescente
-     * @return void.
+     *  .
     */
     @Override
     public int compareTo(Object objeto) {

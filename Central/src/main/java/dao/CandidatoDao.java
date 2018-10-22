@@ -18,14 +18,14 @@ public class CandidatoDao {
     }
     /** 
      * @param candidato Um objeto do tipo Candidato, para ser inserido no arraylist.
-     * @return void.
+     *  .
     */
     public void cadastraCandidato(Candidato candidato){
         this.candidatos.add(candidato);//insere candidato no array
     }
     /** 
      * @param candidato Um objeto do tipo Candidato, para ser removido do arraylist.
-     * @return void.
+     *  .
     */
     public void removeCandidato(Candidato candidato){
         for (Candidato c : candidatos) {//Varre o arraylist de candidatos
@@ -43,7 +43,7 @@ public class CandidatoDao {
 
     /** 
      * @param candidatos Um arraylist do tipo Candidato, para ser inserido no arraylist de candidatos que foram cadastrados.
-     * @return void.
+     *  .
     */
     public void appendArrayList(ArrayList<Candidato> candidatos){
         for (Candidato candidato : candidatos) {//varre o arraylist recebido de parametro

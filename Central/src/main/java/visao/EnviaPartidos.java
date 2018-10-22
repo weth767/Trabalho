@@ -33,7 +33,7 @@ public class EnviaPartidos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     /**Metodo reponsavel por gerar json de todos os partidos cadastrados
-     *@return void
+     * 
      *@version 1.0
      */
     public void geraJson(){
@@ -41,7 +41,7 @@ public class EnviaPartidos extends javax.swing.JFrame {
         Arquivo.criaArquivoJSON(l,"partidos.json");
     }
     /**Metodo reponsavel por enviar Json para o Drive
-     *@return void
+     * 
      *@version 1.0
      */
     public void enviaDrive(){
@@ -50,7 +50,7 @@ public class EnviaPartidos extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Dados dos partidos enviados com sucesso!\n");
     }
      /**Metodo reponsavel por apagar arquivo do drive
-     *@return void
+     * 
      *@version 1.0
      */
     public void apagaDrive(){

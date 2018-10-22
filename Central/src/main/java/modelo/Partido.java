@@ -16,7 +16,7 @@ public class Partido {
     }
     /**
      * @param numero Um valor do tipo int, para ser inserido o numero do partido.
-     * @return void.
+     *  .
     */
     public void setNumero(int numero) {
         this.numero = numero;
@@ -29,7 +29,7 @@ public class Partido {
     }
     /**
      * @param nome Um valor do tipo String, para ser inserido o nome do partido.
-     * @return void.
+     *  .
     */
     public void setNome(String nome) {
         this.nome = nome;

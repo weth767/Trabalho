@@ -15,7 +15,7 @@ public class Voto {
     }
     /**
      * @param candidato Um objeto do tipo Candidato, para ser inserido o voto do candidato.
-     * @return void.
+     *  .
     */
     public void setCandidato(Candidato candidato) {
         this.candidato = candidato;

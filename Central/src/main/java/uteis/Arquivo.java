@@ -52,9 +52,9 @@ public class Arquivo {
     }
     /**
      * @param conteudo Um valor do tipo String, contendo o conteudodo arquivo a ser criado.
-     * @param caminho Um valor do tipo String, contendo o caminho onde o arquivo se encontra.
-     * @return void.
-     * @throws IOException  Caso nao exista o caminho ou conteudo para inserir no arquivo
+     * @param caminho Um valor do tipo String, contendo o caminho onde o arquivo se 
+     @throws java.io.IOException Caso nao encontre o arquivo a ser lido mostra erroencontra.
+     *  .
     */
     public static void criaArquivo(String conteudo, String caminho) throws IOException {
         FileWriter arquivo;//objeto do tipo FileWriter, para escrever no arquivo
@@ -71,7 +71,7 @@ public class Arquivo {
      /**
      * @param lista Um arraylist do tipo Object, os objetos que serao inseridos no arquivo JSON.
      * @param caminho Um valor do tipo String, contendo o caminho onde o arquivo sera cirado.
-     * @return void.
+     *  .
     */
     public static void criaArquivoJSON(ArrayList<Object> lista, String caminho) {
         Gson gson = new Gson();//Cria objeto do tipo Gson para q seja possivel criar o arquivo Json

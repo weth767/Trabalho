@@ -21,14 +21,14 @@ public class EleitorDao{
     }
     /** 
      * @param eleitor Um objeto do tipo Eleitor, para ser inserido no arraylist.
-     * @return void.
+     *  .
     */
     public void cadastraEleitor(Eleitor eleitor){
         this.eleitores.add(eleitor);//insere o eleitor no array
     }
     /** 
      * @param eleitor Um objeto do tipo Eleitor, para ser removido do arraylist.
-     * @return void.
+     *  .
     */
     public void removeEleitor(Eleitor eleitor){
         for (Eleitor e : eleitores) {//varre o arraylis
@@ -38,14 +38,14 @@ public class EleitorDao{
         }
     }
     /** 
-     * @return ArrayList<Eleitor>.
+     * @return ArrayList.
     */
     public ArrayList<Eleitor> retornaEleitores(){
         return this.eleitores;//retorna o arraylist de eleitores cadastrados 
     }  
     /** 
      * @param eleitores Um arraylist do tipo Eleitor, para ser atribuido no arraylist da classse.
-     * @return void.
+     *  .
     */
     public void appendArrayList(ArrayList<Eleitor> eleitores){
         for (Eleitor eleitor : eleitores) {//varre o arraylist recebido
