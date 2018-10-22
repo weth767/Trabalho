@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package visao;
 
 import com.google.gson.Gson;
@@ -27,16 +22,19 @@ import uteis.Arquivo;
 
 /**
  *
- * @author leandro
+ * @author João Paulo e Leandro
  */
 public class BuscaVotos extends javax.swing.JFrame {
 
     /**
      * Creates new form BuscaVotos
      */
-    CandidatoDao candidatoDao;
-    int votoBranco = 0;
-
+    private CandidatoDao candidatoDao;//Objeto de candidato para receber os dados cadastrados
+    private int votoBranco = 0;//contabilizador de votos brancos
+    /**Construtor do Frame
+     *@param candidatoDao, instancia do Dao da classe de candidatos
+     *@version 4.0
+     */
     public BuscaVotos(CandidatoDao candidatoDao) {
         this.candidatoDao = candidatoDao;
         initComponents();
@@ -44,17 +42,20 @@ public class BuscaVotos extends javax.swing.JFrame {
         this.setTitle("Busca Votos");
         this.setLocationRelativeTo(null);
     }
-
+    /**Responsavel por criar arquivos de votos
+     *@version 4.0
+     *@return void
+     */
     public void criaArquivoVotos() {
-        ConexaoDrive.getInstance();
-        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
-        for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
-            if (lista_arquivo.getName().equals("votação.json")) {
+        ConexaoDrive.getInstance();//gerar uma conexao com o drive
+        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();//lista de arquivo para receber todos arquivos existentes no drive
+        for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {//varre a lista
+            if (lista_arquivo.getName().equals("votação.json")) {//caso encontre o arquivo que deseja
                 try {
-                    String conteudo = ConexaoDrive.leArquivoGD(lista_arquivo.getId());
-                    Arquivo.criaArquivo(conteudo, "votação.json");
-                    return;
-                } catch (IOException ex) {
+                    String conteudo = ConexaoDrive.leArquivoGD(lista_arquivo.getId());//pega o conteudo do mesmo
+                    Arquivo.criaArquivo(conteudo, "votação.json");//cria um arquivo local com as mesmas informacoes
+                    return;//retorna
+                } catch (IOException ex) {//captura erro de IO
                     Logger.getLogger(BuscaVotos.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (HTTPException ex) {
                     Logger.getLogger(BuscaVotos.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,55 +65,58 @@ public class BuscaVotos extends javax.swing.JFrame {
         }
     }
 
+    /**Metodo responsavel por gerar um objeto com base no arquivo local
+     *@version 4.0
+     *@return void
+     */
     public ArrayList<Voto> geraObjetoVotacao() {
-        Gson gson = new Gson();
-        FileInputStream arquivoEntrada;
-        ArrayList<Voto> votos = null;
+        Gson gson = new Gson();//Instancia de Gson para ler arquivo Json
+        FileInputStream arquivoEntrada;//arquivo de entrada
+        ArrayList<Voto> votos = null;//ArrayList inicialmente vazio
         try {
-            arquivoEntrada = new FileInputStream("votação.json");
-            BufferedReader leitor = new BufferedReader(new InputStreamReader(arquivoEntrada));
-            votos = new ArrayList();
-            String strLine;
-            while ((strLine = leitor.readLine()) != null) {
-                votos.add(gson.fromJson(strLine, Voto.class));
+            arquivoEntrada = new FileInputStream("votação.json");//tenta abrir o arquivo
+            BufferedReader leitor = new BufferedReader(new InputStreamReader(arquivoEntrada));//objeto de Buffer para armazenar dados lidos do arquivo
+            votos = new ArrayList();//cria o arraylist
+            String strLine;//stringpara receber o conteudo da linha
+            while ((strLine = leitor.readLine()) != null) {//atribui o conteudo da linha e equanto nao retorne null indica que existe dados e devve ser lido
+                votos.add(gson.fromJson(strLine, Voto.class));//armazena os dados no arraylist
             }
-            leitor.close();
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Erro, arquivo não localizado!");
-            this.dispose();
-        } catch (IOException ex) {
+            leitor.close();//fecha o arquvio
+        } catch (FileNotFoundException ex) {//captura erro caso o arquivo nao exista
+            JOptionPane.showMessageDialog(null, "Erro, arquivo não localizado!");//mostra mensagem de erro
+            this.dispose();//fecha o Frame
+        } catch (IOException ex) {//captura erro de IO
             Logger.getLogger(BuscaVotos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return votos;
     }
 
+    /**Responsavel por contabilizar votos
+     *@version 4.0
+     *@return void
+     */
     public void contabilizaVotos() {
-        ArrayList<Voto> votos = this.geraObjetoVotacao();
-        this.votoBranco = 0;
-        for (Voto voto : votos) {
-            if (voto.getCandidato() != null) {
-                for (Candidato candidato : candidatoDao.retornaCandidatos()) {
-                    if (voto.getCandidato().getNumero() == candidato.getNumero()) {
-                        candidato.setQuantidadeVotos(candidato.getQuantidadeVotos() + 1);
+        ArrayList<Voto> votos = this.geraObjetoVotacao();//gera objeto de votos e armazena todos no arraylist
+        this.votoBranco = 0;//contador de votos branco inicia em 0
+        for (Voto voto : votos) {//varre o vetor de votos
+            if (voto.getCandidato() != null) {//caso tenha candidato armazenado no voto
+                for (Candidato candidato : candidatoDao.retornaCandidatos()) {//varre os candidatos cadastrados
+                    if (voto.getCandidato().getNumero() == candidato.getNumero()) {//ao encontrar o numero igual
+                        candidato.setQuantidadeVotos(candidato.getQuantidadeVotos() + 1);//contabiliza os votos
                     }
                 }
-            } else {
-                this.votoBranco ++;
+            } else {//caso nao tenha candidato armazenado no voto indica que o voto esta em branco
+                this.votoBranco ++;//soma no contador
             }
         }
-        Collections.sort(candidatoDao.retornaCandidatos());
-        DefaultTableModel model = (DefaultTableModel) tabelaVotos.getModel();
-        model.addRow(new Object[]{"Votos em Branco", "", this.votoBranco });
-        for (Candidato candidato : candidatoDao.retornaCandidatos()) {
-            model.addRow(new Object[]{candidato.getNome(), candidato.getPartido().getNome(), candidato.getQuantidadeVotos()});
+        Collections.sort(candidatoDao.retornaCandidatos());//ordena o array
+        DefaultTableModel model = (DefaultTableModel) tabelaVotos.getModel();//model para inserir dados na tabela
+        model.addRow(new Object[]{"Votos em Branco", "", this.votoBranco });//adiciona a primeira linha com votos em branco
+        for (Candidato candidato : candidatoDao.retornaCandidatos()) {//varre o vetor de candidatos
+            model.addRow(new Object[]{candidato.getNome(), candidato.getPartido().getNome(), candidato.getQuantidadeVotos()});//insere na tabela seus partidos nomes e quantidade de votos
         }
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

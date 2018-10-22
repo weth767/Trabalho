@@ -14,31 +14,45 @@ import uteis.Arquivo;
 
 /**
  *
- * @author leandro
+ * @author Jõao Paulo e Leandro
  */
 public class EnviaPartidos extends javax.swing.JFrame {
 
     /**
      * Creates new form EnviaPartidos
      */
-    PartidoDao partidoDao;
+    private PartidoDao partidoDao;
+    /**Construtor do Frame
+     *@param partidoDao, instancia do Dao da classe de partidos
+     *@version 4.0
+     */
     public EnviaPartidos(PartidoDao partidoDao) {
         this.partidoDao = partidoDao;
         initComponents();
         this.setTitle("Envia Partidos");
         this.setLocationRelativeTo(null);
     }
-    
+    /**Metodo reponsavel por gerar json de todos os partidos cadastrados
+     *@return void
+     *@version 1.0
+     */
     public void geraJson(){
         ArrayList<Object> l = (ArrayList<Object>)(Object)partidoDao.retornaPartidos();
         Arquivo.criaArquivoJSON(l,"partidos.json");
     }
+    /**Metodo reponsavel por enviar Json para o Drive
+     *@return void
+     *@version 1.0
+     */
     public void enviaDrive(){
         ConexaoDrive.getInstance();
         ConexaoDrive.criaArquivo("partidos.json", "partidos.json");
         JOptionPane.showMessageDialog(this, "Dados dos partidos enviados com sucesso!\n");
     }
-    
+     /**Metodo reponsavel por apagar arquivo do drive
+     *@return void
+     *@version 1.0
+     */
     public void apagaDrive(){
         ConexaoDrive.getInstance();
         List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();

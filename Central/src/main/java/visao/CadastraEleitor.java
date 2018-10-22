@@ -16,15 +16,18 @@ import static uteis.Verifica.validaCPF;
 
 /**
  *
- * @author leandro
+ * @author João Paulo e Leandro
  */
 public class CadastraEleitor extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastraEleitor
      */
-    EleitorDao eleitorDao;
-
+    private EleitorDao eleitorDao;
+    /**Construtor do Frame
+     *@param eleitorDao, instancia do Dao da classe de candidatos
+     *@version 4.0
+     */
     public CadastraEleitor(EleitorDao eleitorDao) {
         this.eleitorDao = eleitorDao;
         initComponents();
@@ -32,7 +35,10 @@ public class CadastraEleitor extends javax.swing.JFrame {
         jCpf.setEditable(true);
         this.setTitle("Cadastra Eleitor");
     }
-
+    /**Metodo reponsavel gerar um novo eleitor com base nas informacoes recebidas nos inputs
+     *@return Eleitor, um objeto de eleitor contendo todas as informacoes do mesmo
+     *@version 1.0
+     */
     public Eleitor novoEleitor() {
         Eleitor eleitor = new Eleitor();
         eleitor.setCpf(jCpf.getText());
@@ -48,15 +54,24 @@ public class CadastraEleitor extends javax.swing.JFrame {
         
         return eleitor;
     }
-
+    
+    /**Metodo reponsavel por limpar os campos
+     *@return void
+     *@version 1.0
+     */
     public void limparCampos() {
         this.jCpf.setText("");
         this.jtfNome.setText("");
         this.jtfTitulo.setText("");
         this.fileName.setText("");
     }
+    /**Metodo por validar os campos do eleitor
+     *@return String, com os possiveis erros encontrados
+     *@version 4.0
+     */
     public String validaEleitor() {
-        String erros = "";
+        String erros = "";//erros inicia vazio
+        //caso algum campo esteja vazio insere o erro
         if (jtfNome.getText().equals("")) {
             erros += "Insira o nome do eleitor\n";
         }

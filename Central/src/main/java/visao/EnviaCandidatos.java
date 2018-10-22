@@ -14,39 +14,52 @@ import uteis.Arquivo;
 
 /**
  *
- * @author leandro
+ * @author Jõao Paulo e Leandro
  */
 public class EnviaCandidatos extends javax.swing.JFrame {
 
     /**
      * Creates new form EnviaPartidos
      */
-    CandidatoDao candidatoDao;
+    private CandidatoDao candidatoDao;
 
+    /**Construtor do Frame
+     *@param candidatoDao, instancia do Dao da classe de candidatos
+     *@version 4.0
+     */
     public EnviaCandidatos(CandidatoDao candidatoDao) {
         this.candidatoDao = candidatoDao;
         initComponents();
         this.setTitle("Envia Candidatos");
         this.setLocationRelativeTo(null);
     }
-
+    /**Metodo reponsavel por gerar json de todos os candidatos cadastrados
+     *@return void
+     *@version 1.0
+     */
     public void geraJson() {
         ArrayList<Object> l = (ArrayList<Object>) (Object) candidatoDao.retornaCandidatos();
         Arquivo.criaArquivoJSON(l, "candidatos.json");
     }
-
+    /**Metodo reponsavel por enviar Json para o Drive
+     *@return void
+     *@version 1.0
+     */
     public void enviaDrive() {
-        ConexaoDrive.getInstance();
-        ConexaoDrive.criaArquivo("candidatos.json", "candidatos.json");
-        JOptionPane.showMessageDialog(this, "Dados dos candidatos enviados com sucesso!\n");
+        ConexaoDrive.getInstance();//Cria conexao
+        ConexaoDrive.criaArquivo("candidatos.json", "candidatos.json");//enviar os dados
+        JOptionPane.showMessageDialog(this, "Dados dos candidatos enviados com sucesso!\n");//mostra mensagem de sucesso
     }
-
+    /**Metodo reponsavel por apagar arquivo do drive
+     *@return void
+     *@version 1.0
+     */
     public void apagaDrive() {
-        ConexaoDrive.getInstance();
-        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
-        for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
-            if (lista_arquivo.getName().equals("candidatos.json")) {
-                ConexaoDrive.removerArquivo(lista_arquivo.getId());
+        ConexaoDrive.getInstance();//cria conexao
+        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();//recebe todos os arquivos
+        for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {//varre os arquvios do drive
+            if (lista_arquivo.getName().equals("candidatos.json")) {//ao encontrar o de candidatos 
+                ConexaoDrive.removerArquivo(lista_arquivo.getId());//remove ele
             }
         }
     }

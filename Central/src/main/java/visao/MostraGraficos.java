@@ -20,11 +20,14 @@ import org.jfree.data.general.PieDataset;
  */
 public class MostraGraficos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form testeGrafico
+    
+    private CandidatoDao candidatoDao;
+    private int votoBranco;
+    /**Construtor do Frame
+     *@param candidatoDao, instancia do Dao da classe de candidatos
+     *@param votoBranco, valor inteiro contendo a quantidade de votos em branco
+     *@version 4.0
      */
-    CandidatoDao candidatoDao;
-    int votoBranco;
     public MostraGraficos(CandidatoDao candidatoDao,int votoBranco) {
         this.candidatoDao = candidatoDao;
         this.votoBranco = votoBranco;
@@ -33,31 +36,41 @@ public class MostraGraficos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Gráfico Eleições");
     }
-
+    /**Metodo responsavel por gerar grafico com base nas informacoes dos candidatos
+     *@return PieDataset, instancia do objeto de grafico gerado
+     *@version 4.0
+     */
     public PieDataset criaGrafico() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        
-        for (Candidato candidato : candidatoDao.retornaCandidatos()){
-            dataset.setValue(candidato.getNome(), candidato.getQuantidadeVotos());
+        DefaultPieDataset dataset = new DefaultPieDataset();//cria objeto responsavel por gear o grafico
+        for (Candidato candidato : candidatoDao.retornaCandidatos()){//varre o vetor de candidatos
+            dataset.setValue(candidato.getNome(), candidato.getQuantidadeVotos());//seta as informacoes no grafico
         }
-        dataset.setValue("Votos brancos", this.votoBranco);
-        return dataset;
+        dataset.setValue("Votos brancos", this.votoBranco);//seta quantidade de votos brancos no grafico
+        return dataset;//retorna o grafico
     }
-
+    /**
+     *@param dataset instancia do objeto de PieDataset, contendo as informaceos do Grafico
+     *@return JFreeChart, instancia do objeto de grafico gerado
+     *@version 4.0
+     */
     public JFreeChart createChart(PieDataset dataset) {
         JFreeChart chart = ChartFactory.createPieChart(
-                "Gráfico Eleições Presidenciais", // chart title 
-                dataset, // data    
-                true, // include legend   
+                "Gráfico Eleições Presidenciais", // titulo do grafico 
+                dataset, // informacoes do grafico    
+                true, // legenda   
                 true,
                 false);
 
         return chart;
     }
 
+    /**
+     *@return JPanel, Painel contendo o grafico gerado
+     *@version 4.0
+     */
     public JPanel createDemoPanel() {
-        JFreeChart chart = createChart(criaGrafico());
-        return new ChartPanel(chart);
+        JFreeChart chart = createChart(criaGrafico());//gera o grafico
+        return new ChartPanel(chart);//retorna o painel
     }
 
     @SuppressWarnings("unchecked")

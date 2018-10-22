@@ -29,34 +29,45 @@ import uteis.Arquivo;
 
 /**
  *
- * @author leandro
+ * @author Jõao Paulo e Leandro
  */
 public class Menu extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
-    PartidoDao partidoDao = new PartidoDao();
-    EleitorDao eleitorDao = new EleitorDao();
-    CandidatoDao candidatoDao = new CandidatoDao();
-
+    private PartidoDao partidoDao = new PartidoDao();
+    private EleitorDao eleitorDao = new EleitorDao();
+    private CandidatoDao candidatoDao = new CandidatoDao();
+    /**Construtor do Frame
+     *@param candidatoDao, instancia do Dao da classe de candidatos
+     *@version 3.0
+     */
     public Menu() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);//cria FRAME FULL SCREAM
         setLocationRelativeTo(null);
         setTitle("Central");
     }
-
+    /**Metodo reponsavel por as informacoes contidas no drive e nao localmente
+     *@return void
+     *@version 1.0
+     */
     public void atualizaDados() {
-        criaArquivoCandidatos();
+        criaArquivoCandidatos();//cria arquivos de Candidatos partidos e eleitores
         criaArquivoPartidos();
         criaArquivoEleitores();
+        //Insere as informacoes nos array sem apagar as anteriores
         candidatoDao.appendArrayList(geraObjetoCandidato());
         partidoDao.appendArrayList(geraObjetoPartido());
         eleitorDao.appendArrayList(geraObjetoEleitores());
         JOptionPane.showMessageDialog(this, "Dados atualizados com sucesso","Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**Metodo reponsavel por criar arquivo de eleitores localmente
+     *@return void
+     *@version 1.0
+     */
     public void criaArquivoEleitores() {
         ConexaoDrive.getInstance();
         List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
@@ -75,7 +86,10 @@ public class Menu extends javax.swing.JFrame {
             }
         }
     }
-
+    /**Metodo reponsavel por criar arquivo de candidatos localmente
+     *@return void
+     *@version 1.0
+     */
     public void criaArquivoCandidatos() {
         ConexaoDrive.getInstance();
         List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
@@ -95,7 +109,10 @@ public class Menu extends javax.swing.JFrame {
             }
         }
     }
-
+    /**Metodo reponsavel por criar arquivo de partidos localmente
+     *@return void
+     *@version 1.0
+     */
     public void criaArquivoPartidos() {
         ConexaoDrive.getInstance();
         List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
@@ -114,7 +131,10 @@ public class Menu extends javax.swing.JFrame {
             }
         }
     }
-
+    /**Metodo reponsavel por gerar objeto de candidatos com base no arquivo local
+     *@return ArrayList<Candidato>, um array contendo todos os candidatos cadastrados
+     *@version 1.0
+     */
     public ArrayList<Candidato> geraObjetoCandidato() {
         Gson gson = new Gson();
         FileInputStream arquivoEntrada;
@@ -136,7 +156,10 @@ public class Menu extends javax.swing.JFrame {
         }
         return candidatos;
     }
-
+    /**Metodo reponsavel por gerar objeto de partidos com base no arquivo local
+     *@return ArrayList<Partido>, um array contendo todos os Partidos cadastrados
+     *@version 1.0
+     */
     public ArrayList<Partido> geraObjetoPartido() {
         Gson gson = new Gson();
         FileInputStream arquivoEntrada;
@@ -157,7 +180,10 @@ public class Menu extends javax.swing.JFrame {
         }
         return partidos;
     }
-
+    /**Metodo reponsavel por gerar objeto de eleitores com base no arquivo local
+     *@return ArrayList<Eleitor>, um array contendo todos os eleitores cadastrados
+     *@version 1.0
+     */
     public ArrayList<Eleitor> geraObjetoEleitores() {
         Gson gson = new Gson();
         FileInputStream arquivoEntrada;

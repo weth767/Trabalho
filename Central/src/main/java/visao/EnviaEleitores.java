@@ -14,36 +14,51 @@ import uteis.Arquivo;
 
 /**
  *
- * @author leandro
+ * @author Jõao Paulo e Leandro
  */
 public class EnviaEleitores extends javax.swing.JFrame {
 
     /**
      * Creates new form EnviaPartidos
      */
-    EleitorDao eleitorDao;
+    private EleitorDao eleitorDao;
+    /**Construtor do Frame
+     *@param eleitorDao, instancia do Dao da classe de eleitores
+     *@version 4.0
+     */
     public EnviaEleitores(EleitorDao eleitorDao) {
         this.eleitorDao = eleitorDao;
         initComponents();
         this.setTitle("Envia Eleitores");
         this.setLocationRelativeTo(null);
     }
-    
+    /**Metodo reponsavel por gerar json de todos os eleitores cadastrados
+     *@return void
+     *@version 1.0
+     */
     public void geraJson(){
         ArrayList<Object> l = (ArrayList<Object>)(Object)eleitorDao.retornaEleitores();
         Arquivo.criaArquivoJSON(l, "eleitores.json");
     }
+    /**Metodo reponsavel por enviar Json para o Drive
+     *@return void
+     *@version 1.0
+     */
     public void enviaDrive(){
-        ConexaoDrive.getInstance();
-        ConexaoDrive.criaArquivo("eleitores.json", "eleitores.json");
-        JOptionPane.showMessageDialog(this, "Dados dos eleitores enviados com sucesso!\n");
+        ConexaoDrive.getInstance();//Cria conexao com o drive
+        ConexaoDrive.criaArquivo("eleitores.json", "eleitores.json");//Cria arquivo de eleitores
+        JOptionPane.showMessageDialog(this, "Dados dos eleitores enviados com sucesso!\n");//mostra mensagem de sucesso
     }
+    /**Metodo reponsavel por apagar arquivo do drive
+     *@return void
+     *@version 1.0
+     */
     public void apagaDrive(){
-        ConexaoDrive.getInstance();
-        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
+        ConexaoDrive.getInstance();//Cria conexao com o drive
+        List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();//lista todos os arquivos do drive
         for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
-            if (lista_arquivo.getName().equals("eleitores.json")) {
-                ConexaoDrive.removerArquivo(lista_arquivo.getId());
+            if (lista_arquivo.getName().equals("eleitores.json")) {//ao encotrar de eleitores
+                ConexaoDrive.removerArquivo(lista_arquivo.getId());//apaga o mesmo
             }
         }
     }

@@ -15,47 +15,62 @@ import static uteis.Verifica.validaCPF;
 
 /**
  *
- * @author leandro
+ * @author João Paulo e Leandro
  */
 public class CadastraCandidato extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastraEleitor
      */
-    CandidatoDao candidatoDao;
-    ArrayList<Partido> arrayPartido;
-    PartidoDao partidoDao;
+    private CandidatoDao candidatoDao;
+    private ArrayList<Partido> arrayPartido;
+    private PartidoDao partidoDao;
 
+    /**Construtor do Frame
+     *@param candidatoDao, instancia do Dao da classe de candidatos
+     *@param partidoDao, instancia do Dao da classe de partidos
+     *@version 4.0
+     */
     public CadastraCandidato(CandidatoDao candidatoDao, PartidoDao partidoDao) {
-        this.partidoDao = partidoDao;
-        this.candidatoDao = candidatoDao;
-        arrayPartido = partidoDao.retornaPartidos();
-        if (arrayPartido.isEmpty()) {
-            this.mostra_erro();
-            this.setVisible(false);
-            this.dispose();
-            return;
+        this.partidoDao = partidoDao;//pega os dados do partido
+        this.candidatoDao = candidatoDao;//candidato
+        arrayPartido = partidoDao.retornaPartidos();//retorna os partidos
+        if (arrayPartido.isEmpty()) {//caso array de partidos venha vazio
+            this.mostra_erro();//mostra erro que nao eh possivel cadastrar candidato sem partido
+            this.setVisible(false);//desabilita o frame
+            this.dispose();//fecha o frame
+            return;//retorna
         }
-        initComponents();
-        this.setLocationRelativeTo(null);
-        jCpf.setEditable(true);
-        this.setTitle("Cadastra Candidato");
-        preenchePartidoCombo(arrayPartido);
+        initComponents();//inicia componentes
+        this.setLocationRelativeTo(null);//coloca no centro
+        jCpf.setEditable(true);//edita CPF
+        this.setTitle("Cadastra Candidato");//coloca Titulo
+        preenchePartidoCombo(arrayPartido);//preenche o compo de partido com base nos cadastrados
 
     }
-
+    /**Metodo reponsavel por mostrar mensagem de erro por falta de partidos
+     *@return void
+     *@version 1.0
+     */
     public void mostra_erro() {
         JOptionPane.showConfirmDialog(this, "Não existe partidos cadastrados, cadaste um partido para continuar", "Erro Partido", JOptionPane.ERROR_MESSAGE);
     }
-
+    /**Metodo reponsavel por preencher o compo de partidos
+     *@return void
+     *@version 2.0
+     */
     public void preenchePartidoCombo(ArrayList<Partido> arrayPartido) {
         for (Partido partido : arrayPartido) {
             jComboPartido.addItem(partido.getNome());
         }
     }
-
+    /**Metodo por validar os campos do candidato
+     *@return String, com os possiveis erros encontrados
+     *@version 4.0
+     */
     public String validaCandidato() {
-        String erros = "";
+        String erros = "";//erros inicia vazio
+        //caso algum campo esteja vazio insere o erro
         if (jtfNome.getText().equals("")) {
             erros += "Insira o nome do candidato\n";
         }
@@ -72,9 +87,12 @@ public class CadastraCandidato extends javax.swing.JFrame {
         if (validaCPF(jCpf.getText()) == false) {
             erros += "CPF Inválido\n";
         }
-        return erros;
+        return erros;//retorna os erros
     }
-
+    /**Metodo reponsavel gerar um novo candidato com base nas informacoes recebidas nos inputs
+     *@return Candidato, um objeto de candidato contendo todas as informacoes do mesmo
+     *@version 1.0
+     */
     public Candidato novoCandidato() {
         Candidato candidato = new Candidato();
         candidato.setCpf(jCpf.getText());
@@ -84,6 +102,10 @@ public class CadastraCandidato extends javax.swing.JFrame {
         return candidato;
     }
 
+    /**Metodo reponsavel por limpar os campos
+     *@return void
+     *@version 1.0
+     */
     public void limparCampos() {
         jCpf.setText("");
         jtfNome.setText("");

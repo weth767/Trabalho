@@ -13,36 +13,50 @@ import modelo.Partido;
 
 /**
  *
- * @author leandro
+ * @author João Paulo e Leandro
  */
 public class CadastraPartido extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastraEleitor
      */
-    PartidoDao partidoDao;
+    private PartidoDao partidoDao;
+    /**Construtor do Frame
+     *@param partidoDao, instancia do Dao da classe de partidos
+     *@version 4.0
+     */
     public CadastraPartido(PartidoDao partidoDao) {
-        this.partidoDao = partidoDao;
+        this.partidoDao = partidoDao;//recebe os dados ja cadastrados caso exista
         initComponents();
         jtfNumero.setEditable(true);
         this.setTitle("Cadastra Partido");
         this.setLocationRelativeTo(null);
     }
-    
+     /**Metodo reponsavel gerar um novo partido com base nas informacoes recebidas nos inputs
+     *@return Partido, um objeto de Partido contendo todas as informacoes do mesmo
+     *@version 1.0
+     */
     public Partido novoPartido(){
         Partido partido = new Partido();
         partido.setNome(jtfNome.getText());
         partido.setNumero(Integer.parseInt(jtfNumero.getText().toString()));
         return partido;
     }
-    
+    /**Metodo reponsavel por limpar os campos
+     *@return void
+     *@version 1.0
+     */
     public void limparCampos(){
         jtfNome.setText("");
         jtfNumero.setText("");
     }
-    
+    /**Metodo por validar os campos do candidato
+     *@return String, com os possiveis erros encontrados
+     *@version 4.0
+     */
     public String validaPartido() {
-        String erros = "";
+        String erros = "";//erros inicia vazio
+        //caso algum campo esteja vazio insere o erro
         if (jtfNome.getText().equals("")) {
             erros += "Insira o nome do partido\n";
         }
