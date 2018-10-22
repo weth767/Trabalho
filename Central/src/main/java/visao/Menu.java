@@ -284,7 +284,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
 
         driveVotos.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        driveVotos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
+        driveVotos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/baixarNuvem.png"))); // NOI18N
         driveVotos.setText("Votos");
         driveVotos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,7 +294,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu1.add(driveVotos);
 
         driveAtualiza.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        driveAtualiza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/enviarNuvem.png"))); // NOI18N
+        driveAtualiza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/baixarNuvem.png"))); // NOI18N
         driveAtualiza.setText("Atualiza Dados");
         driveAtualiza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
