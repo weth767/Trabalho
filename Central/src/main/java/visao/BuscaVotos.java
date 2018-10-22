@@ -35,6 +35,7 @@ public class BuscaVotos extends javax.swing.JFrame {
      * Creates new form BuscaVotos
      */
     CandidatoDao candidatoDao;
+    int votoBranco = 0;
 
     public BuscaVotos(CandidatoDao candidatoDao) {
         this.candidatoDao = candidatoDao;
@@ -87,15 +88,21 @@ public class BuscaVotos extends javax.swing.JFrame {
 
     public void contabilizaVotos() {
         ArrayList<Voto> votos = this.geraObjetoVotacao();
+        this.votoBranco = 0;
         for (Voto voto : votos) {
-            for (Candidato candidato : candidatoDao.retornaCandidatos()) {
-                if (voto.getCandidato().getNumero() == candidato.getNumero()) {
-                    candidato.setQuantidadeVotos(candidato.getQuantidadeVotos() + 1);
+            if (voto.getCandidato() != null) {
+                for (Candidato candidato : candidatoDao.retornaCandidatos()) {
+                    if (voto.getCandidato().getNumero() == candidato.getNumero()) {
+                        candidato.setQuantidadeVotos(candidato.getQuantidadeVotos() + 1);
+                    }
                 }
+            } else {
+                this.votoBranco ++;
             }
         }
         Collections.sort(candidatoDao.retornaCandidatos());
         DefaultTableModel model = (DefaultTableModel) tabelaVotos.getModel();
+        model.addRow(new Object[]{"Votos em Branco", "", this.votoBranco });
         for (Candidato candidato : candidatoDao.retornaCandidatos()) {
             model.addRow(new Object[]{candidato.getNome(), candidato.getPartido().getNome(), candidato.getQuantidadeVotos()});
         }
@@ -212,14 +219,14 @@ public class BuscaVotos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoGeraGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGeraGraficoActionPerformed
-        new MostraGraficos(candidatoDao).setVisible(true);
+        new MostraGraficos(candidatoDao,this.votoBranco ).setVisible(true);
     }//GEN-LAST:event_botaoGeraGraficoActionPerformed
 
     private void botaoBaixaVotos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBaixaVotos1ActionPerformed
         this.criaArquivoVotos();
         this.contabilizaVotos();
         JOptionPane.showMessageDialog(this, "Dados dos votos baixados com sucesso!\n");
-        if(tabelaVotos.getRowCount() > 0){
+        if (tabelaVotos.getRowCount() > 0) {
             botaoGeraGrafico.setEnabled(true);
         }
     }//GEN-LAST:event_botaoBaixaVotos1ActionPerformed

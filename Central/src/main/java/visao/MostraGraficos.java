@@ -16,7 +16,7 @@ import org.jfree.data.general.PieDataset;
 
 /**
  *
- * @author leandro
+ * @author João Paulo e  Leandro
  */
 public class MostraGraficos extends javax.swing.JFrame {
 
@@ -24,8 +24,10 @@ public class MostraGraficos extends javax.swing.JFrame {
      * Creates new form testeGrafico
      */
     CandidatoDao candidatoDao;
-    public MostraGraficos(CandidatoDao candidatoDao) {
+    int votoBranco;
+    public MostraGraficos(CandidatoDao candidatoDao,int votoBranco) {
         this.candidatoDao = candidatoDao;
+        this.votoBranco = votoBranco;
         initComponents();
         this.setContentPane(createDemoPanel());
         this.setLocationRelativeTo(null);
@@ -38,6 +40,7 @@ public class MostraGraficos extends javax.swing.JFrame {
         for (Candidato candidato : candidatoDao.retornaCandidatos()){
             dataset.setValue(candidato.getNome(), candidato.getQuantidadeVotos());
         }
+        dataset.setValue("Votos brancos", this.votoBranco);
         return dataset;
     }
 
