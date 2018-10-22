@@ -99,15 +99,17 @@ public class BuscaVotos extends javax.swing.JFrame {
     public void contabilizaVotos() {
         ArrayList<Voto> votos = this.geraObjetoVotacao();//gera objeto de votos e armazena todos no arraylist
         this.votoBranco = 0;//contador de votos branco inicia em 0
-        for (Voto voto : votos) {//varre o vetor de votos
-            if (voto.getCandidato() != null) {//caso tenha candidato armazenado no voto
-                for (Candidato candidato : candidatoDao.retornaCandidatos()) {//varre os candidatos cadastrados
-                    if (voto.getCandidato().getNumero() == candidato.getNumero()) {//ao encontrar o numero igual
-                        candidato.setQuantidadeVotos(candidato.getQuantidadeVotos() + 1);//contabiliza os votos
+        if(!votos.isEmpty()){//Verifica se o Arraylist de votos nao esta vazio
+            for (Voto voto : votos) {//varre o vetor de votos
+                if (voto.getCandidato() != null) {//caso tenha candidato armazenado no voto
+                    for (Candidato candidato : candidatoDao.retornaCandidatos()) {//varre os candidatos cadastrados
+                        if (voto.getCandidato().getNumero() == candidato.getNumero()) {//ao encontrar o numero igual
+                            candidato.setQuantidadeVotos(candidato.getQuantidadeVotos() + 1);//contabiliza os votos
+                        }
                     }
+                } else {//caso nao tenha candidato armazenado no voto indica que o voto esta em branco
+                    this.votoBranco ++;//soma no contador
                 }
-            } else {//caso nao tenha candidato armazenado no voto indica que o voto esta em branco
-                this.votoBranco ++;//soma no contador
             }
         }
         Collections.sort(candidatoDao.retornaCandidatos());//ordena o array
@@ -117,6 +119,7 @@ public class BuscaVotos extends javax.swing.JFrame {
             model.addRow(new Object[]{candidato.getNome(), candidato.getPartido().getNome(), candidato.getQuantidadeVotos()});//insere na tabela seus partidos nomes e quantidade de votos
         }
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
