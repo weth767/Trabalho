@@ -70,6 +70,10 @@ public class Menu extends javax.swing.JFrame {
     public void criaArquivoEleitores() {
         ConexaoDrive.getInstance();
         List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
+        if(lista_arquivos == null){
+            JOptionPane.showMessageDialog(this, "Erro, confira sua conexão com a internet","Erro",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
             if (lista_arquivo.getName().equals("eleitores.json")) {
                 try {
@@ -92,6 +96,10 @@ public class Menu extends javax.swing.JFrame {
     public void criaArquivoCandidatos() {
         ConexaoDrive.getInstance();
         List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
+        if(lista_arquivos == null){
+            JOptionPane.showMessageDialog(this, "Erro, confira sua conexão com a internet","Erro",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
             if (lista_arquivo.getName().equals("candidatos.json")) {
                 try {
@@ -115,6 +123,10 @@ public class Menu extends javax.swing.JFrame {
     public void criaArquivoPartidos() {
         ConexaoDrive.getInstance();
         List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();
+        if(lista_arquivos == null){
+            JOptionPane.showMessageDialog(this, "Erro, confira sua conexão com a internet","Erro",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {
             if (lista_arquivo.getName().equals("partidos.json")) {
                 try {
@@ -233,6 +245,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/eleicoes.png"))); // NOI18N
 
         Cadastros.setText("Cadastros");

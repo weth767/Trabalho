@@ -49,6 +49,10 @@ public class BuscaVotos extends javax.swing.JFrame {
     public void criaArquivoVotos() {
         ConexaoDrive.getInstance();//gerar uma conexao com o drive
         List<com.google.api.services.drive.model.File> lista_arquivos = ConexaoDrive.listaArquivos();//lista de arquivo para receber todos arquivos existentes no drive
+        if(lista_arquivos == null){
+            JOptionPane.showMessageDialog(this, "Erro, confira sua conexão com a internet","Erro",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         for (com.google.api.services.drive.model.File lista_arquivo : lista_arquivos) {//varre a lista
             if (lista_arquivo.getName().equals("votação.json")) {//caso encontre o arquivo que deseja
                 try {
